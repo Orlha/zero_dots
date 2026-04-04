@@ -75,6 +75,10 @@ bindkey -s "^[[21~" ""
 bindkey -s "^[[23~" ""
 bindkey -s "^[[24~" ""
 
+if [[ $distro == "ID=ubuntu" ]]; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
+
 return
 
 # Keypad

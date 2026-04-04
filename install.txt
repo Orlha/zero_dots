@@ -29,6 +29,8 @@ ubuntu: fd-find
 install ripgrep
 
 install fzf
+arch: fzf
+ubuntu: install from git
 
 install starship
 arch: starship
