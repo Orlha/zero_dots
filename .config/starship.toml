@@ -1,0 +1,75 @@
+add_newline=false
+
+#format = """
+#$directory\
+#$character
+#"""
+right_format = "$time$git_branch$git_status"
+
+# Directory settings
+[directory]
+style = "bold cyan"
+truncation_length = 3
+truncation_symbol = "…/"
+
+
+# Prompt character
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+# Disable everything else
+[git_branch]
+disabled = false
+symbol = "🌱 "
+format = '[$symbol$branch]($style) '
+
+[git_status]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[c]
+disabled = true
+
+[java]
+disabled = true
+
+[python]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[rust]
+disabled = true
+
+[package]
+disabled = true
+
+[cmake]
+disabled = true
+
+[lua]
+disabled = true
+
+[username]
+style_user = "green"
+style_root = "bold red"
+show_always = true
+
+[hostname]
+ssh_only = false
+disabled = false
+
+[cmd_duration]
+disabled = false
+
+[line_break]
+disabled = true
+
+[time]
+disabled = false
+format = '[🕙 $time]($style) '
+time_format = '%H:%M:%S'
