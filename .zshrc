@@ -37,6 +37,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle sudo
 antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle colored-man-pages
+antigen bundle command-not-found
 antigen apply
 
 bindkey  "^[[1~"   beginning-of-line
