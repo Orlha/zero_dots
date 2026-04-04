@@ -1,1 +1,21 @@
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+Dependencies:
+
+install tmux-plugin-manager
+arch: tmux-plugin-manager (AUR)
+
+
+install antigen
+arch: antigen-git (AUR)
+ubuntu: antigen
+
+install zoxide
+
+install fd
+
+install ripgrep
+
+install fzf
+
+install starship
+arch: starship
+ubuntu: curl -sS https://starship.rs/install.sh | sh
