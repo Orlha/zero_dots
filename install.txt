@@ -1,25 +1,30 @@
 Dependencies:
 
 install tmux-plugin-manager
-arch: tmux-plugin-manager (AUR)
+    arch: tmux-plugin-manager (AUR)
+    ubuntu: tmux-plugin-manager
 
 
 install antigen
-arch: antigen-git (AUR)
-ubuntu: zsh-antigen
+    arch: antigen-git (AUR)
+    ubuntu: zsh-antigen
 
 install plug
-download https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-put into .local/share/nvim/site/autoload/
+    download https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    put into .local/share/nvim/site/autoload/
 
 install neovim
-arch: neovim
-ubuntu: needs magic to get 0.9 version
-  sudo add-apt-repository ppa:neovim-ppa/unstable
+    arch: neovim
+    ubuntu:
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+        neovim
 
 install zoxide
+..
 
 install fd
+arch: fd
+ubuntu: fd-find
 
 install ripgrep
 
