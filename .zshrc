@@ -23,7 +23,13 @@ setopt SHARE_HISTORY
 tabs 4
 
 eval "$(zoxide init zsh)"
-source /usr/share/zsh/share/antigen.zsh
+
+distro=$(grep ^ID= /etc/os-release)
+if [[ $distro == "ID=ubuntu" ]]; then
+    source /usr/share/zsh-antigen/antigen.zsh
+else
+    source /usr/share/zsh/share/antigen.zsh
+fi
 
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
