@@ -77,6 +77,8 @@ bindkey -s "^[[24~" ""
 
 if [[ $distro == "ID=ubuntu" ]]; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+else
+    source <(fzf --zsh)
 fi
 
 return
