@@ -8,6 +8,7 @@ compinit
 zstyle ':completion:*' menu select
 
 alias ls='ls --color=auto'
+alias ip='ip -c=auto'
 alias poweroff='poweroff --no-wall'
 alias reboot='reboot --no-wall'
 alias vim=nvim
