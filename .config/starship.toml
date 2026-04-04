@@ -4,7 +4,7 @@ add_newline=false
 #$directory\
 #$character
 #"""
-right_format = "$time$git_branch$git_status"
+right_format = "$git_branch$git_status$time"
 
 # Directory settings
 [directory]
