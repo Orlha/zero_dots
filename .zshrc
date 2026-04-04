@@ -49,6 +49,8 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 bindkey "^[[5~" history-search-backward
 bindkey "^[[6~" history-search-forward
+bindkey '^k' up-line-or-history
+bindkey '^j' down-line-or-history
 #bindkey '\e[1;3C' history-beginning-search-backward
 #bindkey '\e[1;3D' history-beginning-search-forward
 #bindkey '\e[1;3A' history-beginning-search-backward
