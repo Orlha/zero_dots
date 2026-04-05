@@ -32,7 +32,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-tree/nvim-tree.lua'
 "Plug 'shaunsingh/seoul256.nvim'
-"Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 "Plug 'rrrrrm/seoul256.nvim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'sainnhe/everforest'
@@ -53,7 +53,10 @@ call plug#end()
 set termguicolors
 set background=dark
 "colorscheme nightfox
-colorscheme nordfox
+"colorscheme nordfox
+"colorscheme catppuccin-frappe
+"colorscheme catppuccin-macchiato
+colorscheme catppuccin-mocha
 "let g:airline_theme = 'badwulf'
 "let g:airline_theme = 'ayu_dark'
 "let g:airline_theme = 'hybridline'
