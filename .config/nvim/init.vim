@@ -171,10 +171,24 @@ lua << EOF
     require("catppuccin").setup({
         no_italic = true,
     })
+    vim.cmd.colorscheme "catppuccin-mocha"
+
+    local highlights = {
+        FzfLuaNormal       = { bg = "NONE" },
+        FzfLuaBorder       = { bg = "NONE" },
+        FzfLuaPreviewNormal = { bg = "NONE" },
+        FzfLuaPreviewBorder = { bg = "NONE" },
+        -- Optional: clear the backdrop if you use it
+        FzfLuaBackdrop      = { bg = "NONE" },
+    }
+
+    for group, opts in pairs(highlights) do
+        vim.api.nvim_set_hl(0, group, opts)
+    end
+
 
     vim.opt.foldlevelstart = 99
     --vim.cmd.colorscheme "vscode"
-    vim.cmd.colorscheme "catppuccin-mocha"
 EOF
 
 autocmd VimLeave * set guicursor=a:hor20
