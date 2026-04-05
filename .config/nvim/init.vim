@@ -17,6 +17,7 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
+set noshowmode
 
 " tabs angles
 let g:airline#extensions#tabline#enabled = 1
@@ -128,6 +129,16 @@ lua << EOF
     vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>")
     vim.opt.shortmess:append("I")
     require("nvim-autopairs").setup {}
+
+    vim.g.airline_mode_map = {
+        ['n']  = 'NORMAL ',
+        ['i']  = 'INSERT ',
+        ['c']  = 'COMMAND ',
+        ['v']  = 'VISUAL ',
+        ['V']  = 'V·LINE ',
+        [''] = 'V·BLOCK ',
+        ['s']  = 'SELECT ',
+    }
 
     vim.opt.foldlevelstart = 99
 EOF
