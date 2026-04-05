@@ -42,7 +42,8 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'justinmk/vim-sneak'
-Plug 'cohama/lexima.vim'
+"Plug 'cohama/lexima.vim'
+Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
 
 call plug#end()
@@ -126,6 +127,7 @@ lua << EOF
     vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>")
     vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>")
     vim.opt.shortmess:append("I")
+    require("nvim-autopairs").setup {}
 
     vim.opt.foldlevelstart = 99
 EOF
