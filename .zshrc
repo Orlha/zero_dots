@@ -14,6 +14,7 @@ alias reboot='reboot --no-wall'
 alias vim='nvim'
 alias nnn='nnn -e'
 
+
 export EDITOR=nvim
 export PATH=$HOME/bin:$PATH
 
@@ -41,6 +42,9 @@ antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle colored-man-pages
 antigen bundle command-not-found
 antigen apply
+
+# unbind alt+l that zsh bind
+bindkey -r "^[l"
 
 bindkey  "^[[1~"   beginning-of-line
 bindkey  "^[[4~"   end-of-line
