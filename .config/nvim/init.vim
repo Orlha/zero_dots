@@ -51,7 +51,12 @@ call plug#end()
 set termguicolors
 set background=dark
 colorscheme nightfox
-let g:airline_theme = 'badwolf'
+"let g:airline_theme = 'badwulf'
+"let g:airline_theme = 'ayu_dark'
+"let g:airline_theme = 'hybridline'
+"let g:airline_theme = 'google_dark'
+"let g:airline_theme = 'durant'
+let g:airline_theme = 'bubblegum'
 
 " transparency
 " Set the main editor background to transparent
