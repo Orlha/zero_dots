@@ -111,17 +111,17 @@ lua << EOF
     vim.opt.splitright = true
     vim.opt.splitbelow = true
     local map = vim.keymap.set
-    map('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
-    map('n', '<leader>q', ':bd<CR>', { desc = 'Close buffer' })
-    map('n', '<leader>Q', ':bd<CR>', { desc = 'Force close buffer' })
-    map('n', '<leader>n', ':bn<CR>', { desc = 'Next buffer' })
-    map('n', '<leader>p', ':bp<CR>', { desc = 'Previous buffer' })
-    map('n', '<leader>s', ':noh<CR>', { desc = 'Clear search highlight' })
+    map('n', '<leader>w', ':w<CR>', { silent = true, desc = 'Save file' })
+    map('n', '<leader>q', ':bd<CR>', { silent = true, desc = 'Close buffer' })
+    map('n', '<leader>Q', ':bd<CR>', { silent = true, desc = 'Force close buffer' })
+    map('n', '<leader>n', ':bn<CR>', { silent = true, desc = 'Next buffer' })
+    map('n', '<leader>p', ':bp<CR>', { silent = true, desc = 'Previous buffer' })
+    map('n', '<leader>s', ':noh<CR>', { silent = true, desc = 'Clear search highlight' })
     -- fzf lua mappings
-    vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>')      -- Files
-    vim.keymap.set('n', '<leader>fg', ':FzfLua live_grep<CR>')  -- Grep
-    vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>')    -- Buffers
-    vim.keymap.set('n', '<leader>fr', ':FzfLua oldfiles<CR>')   -- Recent
+    vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>', { silent = true })      -- Files
+    vim.keymap.set('n', '<leader>fg', ':FzfLua live_grep<CR>', { silent = true })  -- Grep
+    vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>', { silent = true })    -- Buffers
+    vim.keymap.set('n', '<leader>fr', ':FzfLua oldfiles<CR>', { silent = true })   -- Recent
     -- Replace default w, e, b with spider versions
     vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>")
     vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>")
