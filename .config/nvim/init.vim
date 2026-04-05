@@ -168,6 +168,10 @@ lua << EOF
     }
     })
 
+    require("catppuccin").setup({
+        no_italic = true,
+    })
+
     vim.opt.foldlevelstart = 99
     --vim.cmd.colorscheme "vscode"
     vim.cmd.colorscheme "catppuccin-mocha"
