@@ -78,6 +78,6 @@ disabled = true
 
 [time]
 disabled = false
-style = "bold #ff5555"
+style = "bold blue"
 format = '[🕙 $time]($style) '
 time_format = '%H:%M:%S'
