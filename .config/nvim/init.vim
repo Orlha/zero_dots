@@ -88,7 +88,7 @@ lua << EOF
     vim.opt.shiftwidth = 4
     vim.opt.expandtab = true
     -- nvim tree settings
-    vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
+    --vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
     require("nvim-tree").setup()
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "NONE" })
@@ -175,6 +175,8 @@ EOF
 
 autocmd VimLeave * set guicursor=a:hor20
 let g:sneak#label = 1
+nnoremap <silent><F1> :NvimTreeToggle<CR>
+inoremap <silent><F1> <ESC>:NvimTreeToggle<CR>
 nnoremap <silent><F2> :set paste!<CR>
 inoremap <silent><F2> <ESC>:set paste!<CR>
 nmap <silent><F4> :set list!<CR>:set number!<CR>:set relativenumber!<CR>
