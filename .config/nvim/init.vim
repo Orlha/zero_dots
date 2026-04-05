@@ -134,6 +134,10 @@ EOF
 
 autocmd VimLeave * set guicursor=a:hor20
 let g:sneak#label = 1
+nnoremap <silent><F2> :set paste!<CR>
+inoremap <silent><F2> <ESC>:set paste!<CR>
+nmap <silent><F4> :set list!<CR>:set number!<CR>:set relativenumber!<CR>
+imap <silent><F4> <Esc>:set list!<CR>:set number!<CR>:set relativenumber!<CR>
 
 " mappings
 "nnoremap <leader>ff <cmd>Telescope find_files<cr>
