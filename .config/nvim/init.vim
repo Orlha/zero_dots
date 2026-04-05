@@ -50,7 +50,8 @@ call plug#end()
 " themes
 set termguicolors
 set background=dark
-colorscheme nightfox
+"colorscheme nightfox
+colorscheme nordfox
 "let g:airline_theme = 'badwulf'
 "let g:airline_theme = 'ayu_dark'
 "let g:airline_theme = 'hybridline'
