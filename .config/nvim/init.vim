@@ -46,6 +46,7 @@ Plug 'justinmk/vim-sneak'
 "Plug 'cohama/lexima.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
+Plug 'Mofiqul/vscode.nvim'
 
 call plug#end()
 
@@ -56,7 +57,7 @@ set background=dark
 "colorscheme nordfox
 "colorscheme catppuccin-frappe
 "colorscheme catppuccin-macchiato
-colorscheme catppuccin-mocha
+"colorscheme catppuccin-mocha
 "let g:airline_theme = 'badwulf'
 "let g:airline_theme = 'ayu_dark'
 "let g:airline_theme = 'hybridline'
@@ -64,17 +65,6 @@ colorscheme catppuccin-mocha
 "let g:airline_theme = 'durant'
 let g:airline_theme = 'bubblegum'
 
-" transparency
-" Set the main editor background to transparent
-highlight Normal guibg=NONE ctermbg=NONE
-" Set the line number column background to transparent
-highlight LineNr guibg=NONE ctermbg=NONE
-" Set the background for the column to the right of the line numbers
-highlight SignColumn guibg=NONE ctermbg=NONE
-
-" nvim-tree transparency for inactive tab
-hi NormalNC guibg=NONE ctermbg=NONE
-hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
 
 " better cpp highlighting settings
 let g:cpp_class_scope_highlight = 1
@@ -142,8 +132,45 @@ lua << EOF
         [''] = 'V·BLOCK ',
         ['s']  = 'SELECT ',
     }
+    local c = require('vscode.colors').get_colors()
+    require('vscode').setup({
+    -- Alternatively set style in setup
+    -- style = 'light'
+
+    -- Enable transparent background
+    transparent = true,
+
+    -- Enable italic comment
+    --italic_comments = true,
+
+    -- Enable italic inlay type hints
+    --italic_inlayhints = true,
+
+    -- Underline `@markup.link.*` variants
+    underline_links = true,
+
+    -- Disable nvim-tree background color
+    disable_nvimtree_bg = true,
+
+    -- Apply theme colors to terminal
+    terminal_colors = true,
+
+    -- Override colors (see ./lua/vscode/colors.lua)
+    color_overrides = {
+        --vscLineNumber = '#FFFFFF',
+    },
+
+    -- Override highlight groups (see ./lua/vscode/theme.lua)
+    group_overrides = {
+        -- this supports the same val table as vim.api.nvim_set_hl
+        -- use colors from this colorscheme by requiring vscode.colors!
+        Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
+    }
+    })
 
     vim.opt.foldlevelstart = 99
+    --vim.cmd.colorscheme "vscode"
+    vim.cmd.colorscheme "catppuccin-mocha"
 EOF
 
 autocmd VimLeave * set guicursor=a:hor20
@@ -156,3 +183,17 @@ imap <silent><F4> <Esc>:set list!<CR>:set number!<CR>:set relativenumber!<CR>
 " mappings
 "nnoremap <leader>ff <cmd>Telescope find_files<cr>
 "nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+
+
+" transparency
+" Set the main editor background to transparent
+highlight Normal guibg=NONE ctermbg=NONE
+" Set the line number column background to transparent
+highlight LineNr guibg=NONE ctermbg=NONE
+" Set the background for the column to the right of the line numbers
+highlight SignColumn guibg=NONE ctermbg=NONE
+
+" nvim-tree transparency
+hi NormalNC guibg=NONE ctermbg=NONE
+hi NvimTreeNormal guibg=NONE ctermbg=NONE
+hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
