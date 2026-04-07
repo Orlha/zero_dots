@@ -31,6 +31,7 @@ call plug#begin()
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 "Plug 'shaunsingh/seoul256.nvim'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
@@ -217,7 +218,7 @@ lua << EOF
         -- user initiated a `y` motion (e.g. `yy`, `yiw`, etc). Set to `false`
         -- if you wish to copy indiscriminately:
         -- validate_yank = false,
-        -- 
+        --
         -- For advanced customization set to a lua function returning a boolean
         -- for example, the default condition is:
         -- validate_yank = function() return vim.v.operator == "y" end,
@@ -359,6 +360,8 @@ vim.api.nvim_create_autocmd("WinClosed", {
     warning_list_open = false
   end,
 })
+
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 EOF
 
 
@@ -384,4 +387,36 @@ require('gitsigns').setup({
   attach_to_untracked = true,  -- This will show signs for new files
   -- ... rest of your config
 })
+EOF
+
+
+lua << EOF
+--[[
+require('lualine').setup({
+  options = {
+    --theme = 'catppuccin-mocha',
+    theme = 'onedark',
+    icons_enabled = true,
+    component_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
+    globalstatus = true,
+  },
+  sections = {
+    lualine_a = {
+      {
+        'mode',
+        fmt = function(str)
+          return str:upper() .. ' '
+        end
+      }
+    },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' },
+  },
+  extensions = { 'quickfix' },
+})
+]]
 EOF
