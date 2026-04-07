@@ -48,6 +48,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
 Plug 'Mofiqul/vscode.nvim'
 Plug 'ibhagwan/smartyank.nvim'
+Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 
 call plug#end()
@@ -254,29 +255,80 @@ hi NvimTreeNormal guibg=NONE ctermbg=NONE
 hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
 
 
-
-" Configure blink.cmp
+" configure blink.cmp
 lua << EOF
 require('blink.cmp').setup({
-  -- Use Lua fallback to avoid Rust compilation issues
   fuzzy = { implementation = "lua" },
-  
-  -- Show completions automatically
+
   completion = {
+    menu = {
+      auto_show = false,
+    },
     documentation = { auto_show = false },
   },
-  
-  -- Key mappings (use <Tab> to navigate)
+
   keymap = {
     preset = 'default',
     ['<Tab>'] = { 'select_next', 'fallback' },
     ['<S-Tab>'] = { 'select_prev', 'fallback' },
+    ['<Space>'] = { 'select_and_accept', 'fallback' },
+    ['<C-Space>'] = { 'show', 'fallback' },
   },
-  
-  -- Where completions come from
+
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
 })
 EOF
 
+lua << EOF
+-- Minimal clangd setup for type highlighting
+vim.lsp.config.clangd = {
+  cmd = { "clangd" },
+}
+vim.lsp.enable('clangd')
+EOF
+
+" Configure LSP for C++
+lua << EOF
+vim.lsp.config.clangd = {
+  cmd = { "clangd" },
+  filetypes = { "c", "cpp", "cc", "cxx", "h", "hpp", "hh", "hxx" },
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
+}
+
+-- Enable LSP for C++ files
+vim.lsp.enable('clangd')
+
+-- Show warning under cursor
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+
+-- Jump between warnings
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+
+-- List all warnings
+vim.keymap.set('n', '<leader>l', function()
+  vim.diagnostic.setqflist()
+  vim.cmd('copen')
+end)
+EOF
+
+
+lua << EOF
+-- Add LSP toggle here (inside the same Lua block)
+local lsp_enabled = true
+vim.keymap.set('n', '<leader>l', function()
+  if lsp_enabled then
+    for _, client in pairs(vim.lsp.get_clients()) do
+      client.stop()
+    end
+    lsp_enabled = false
+    vim.notify("LSP disabled", "info", { title = "LSP Toggle" })
+  else
+    vim.lsp.enable('clangd')
+    lsp_enabled = true
+    vim.notify("LSP enabled", "info", { title = "LSP Toggle" })
+  end
+end, { desc = "Toggle LSP on/off" })
+EOF
