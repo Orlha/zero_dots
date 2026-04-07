@@ -47,6 +47,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -445,7 +446,7 @@ end
 ]]
 EOF
 
-
+set nosmartindent
 lua << EOF
 require("trouble").setup({
   modes = {
@@ -479,4 +480,10 @@ EOF
 lua << EOF
 -- Suppress deprecation warnings for diagnostic.goto_prev/goto_next
 vim.deprecate = function() end
+EOF
+
+
+lua << EOF
+require('nvim-treesitter').install { 'cpp', 'c' }
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 EOF

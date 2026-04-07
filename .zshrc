@@ -11,7 +11,7 @@ alias ls='ls --color=auto'
 alias ip='ip -c=auto'
 alias poweroff='poweroff --no-wall'
 alias reboot='reboot --no-wall'
-alias vim='nvim'
+#alias vim='nvim'
 alias nnn='nnn -e'
 
 
