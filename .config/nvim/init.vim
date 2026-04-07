@@ -376,6 +376,14 @@ require('lualine').setup({
 EOF
 
 lua << EOF
+local virtual_text_config = {
+    format = function(diagnostic)
+      return diagnostic.message:gsub("%(fix available%)", "")
+      -- Or try other icons: " 󰛩", " 󰃣", " 󰐃", " "
+    end,
+    prefix = "●",
+}
+
 vim.diagnostic.config({
   signs = {
     text = {
@@ -385,19 +393,26 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.HINT]  = "",
     },
   },
-  virtual_text = {
-    format = function(diagnostic)
-      return diagnostic.message:gsub("%(fix available%)", "")
-    end,
-    prefix = "●",
-  },
+  --virtual_text = virtual_text_config,
   underline = true,
   update_in_insert = false,
 })
 
--- DISABLE VIRTUAL TEXT ON STARTUP
-vim.diagnostic.config({ virtual_text = false })
+-- Toggle virtual text on/off while preserving config
+local vtext_enabled = false
+vim.keymap.set('n', '<leader>v', function()
+  vtext_enabled = not vtext_enabled
+  if vtext_enabled then
+    vim.diagnostic.config({ virtual_text = virtual_text_config })
+    vim.notify("Virtual text enabled", "info", { title = "Diagnostics" })
+  else
+    vim.diagnostic.config({ virtual_text = false })
+    vim.notify("Virtual text disabled", "info", { title = "Diagnostics" })
+  end
+end, { desc = "Toggle virtual text" })
+EOF
 
+lua << EOF
 vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
@@ -410,6 +425,7 @@ EOF
 
 
 lua << EOF
+--[[
 -- Store original handler
 local original_handler = vim.lsp.handlers['textDocument/publishDiagnostics']
 
@@ -426,6 +442,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = function(err, result, ctx,
   end
   original_handler(err, result, ctx, config)
 end
+]]
 EOF
 
 
@@ -456,16 +473,6 @@ vim.api.nvim_set_hl(0, "TroubleBorder", { bg = "NONE" })
 EOF
 
 lua << EOF
--- Toggle with icon in statusline
-local vtext_on = false
-
-vim.keymap.set('n', '<leader>v', function()
-  vtext_on = not vtext_on
-  vim.diagnostic.config({ virtual_text = vtext_on })
-  
-  local icon = vtext_on and "󰎢" or "󰅙"
-  vim.notify(icon .. " Virtual text " .. (vtext_on and "on" or "off"), "info")
-end, { desc = "Toggle virtual text" })
 EOF
 
 
