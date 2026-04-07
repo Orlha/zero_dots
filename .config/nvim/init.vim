@@ -432,7 +432,6 @@ EOF
 lua << EOF
 require("trouble").setup({
   modes = {
-    -- Create a new mode named 'my_flat_diagnostics'
     diagnostics_flat = {
       mode = "diagnostics", -- inherit from the base diagnostics mode
       filter = { buf = 0 }, -- only show current buffer
@@ -442,6 +441,7 @@ require("trouble").setup({
       sort = { "severity", "pos" }, -- sort by error level then position
     },
   },
+  warn_no_results = false,
 })
 
 vim.keymap.set("n", "<leader>l", "<cmd>Trouble diagnostics_flat toggle<cr>", {
