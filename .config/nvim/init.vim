@@ -332,3 +332,8 @@ vim.keymap.set('n', '<leader>t', function()
   end
 end, { desc = "Toggle LSP on/off" })
 EOF
+
+
+lua << EOF
+vim.opt.signcolumn = "yes"
+EOF
