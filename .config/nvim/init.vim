@@ -33,19 +33,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
-"Plug 'shaunsingh/seoul256.nvim'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-"Plug 'rrrrrm/seoul256.nvim'
 Plug 'octol/vim-cpp-enhanced-highlight'
-"Plug 'sainnhe/everforest'
-"Plug 'ellisonleao/gruvbox.nvim'
 Plug 'EdenEast/nightfox.nvim'
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'justinmk/vim-sneak'
-"Plug 'cohama/lexima.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
 Plug 'Mofiqul/vscode.nvim'
@@ -53,6 +46,7 @@ Plug 'ibhagwan/smartyank.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'folke/trouble.nvim'
 
 call plug#end()
 
@@ -98,12 +92,6 @@ lua << EOF
     require("nvim-tree").setup()
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "NONE" })
-    -- telescope settings
-    --require('telescope').setup({
-    --    defaults = {
-    --        file_ignore_patterns = { "node_modules", ".git" },
-    --    },
-    --})
     -- others
     vim.g.mapleader = ' '
     vim.opt.termguicolors = true
@@ -284,14 +272,6 @@ require('blink.cmp').setup({
 })
 EOF
 
-lua << EOF
--- Minimal clangd setup for type highlighting
-vim.lsp.config.clangd = {
-  cmd = { "clangd" },
-}
-vim.lsp.enable('clangd')
-EOF
-
 " Configure LSP for C++
 lua << EOF
 vim.lsp.config.clangd = {
@@ -309,8 +289,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 -- Jump between warnings
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-
--- List all warnings
 EOF
 
 
@@ -339,6 +317,7 @@ EOF
 
 
 lua << EOF
+--[[
 -- Track state separately
 local warning_list_open = false
 
@@ -360,35 +339,10 @@ vim.api.nvim_create_autocmd("WinClosed", {
     warning_list_open = false
   end,
 })
+]]
 
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 EOF
-
-
-lua << EOF
--- Set both icon AND custom colors for better visibility
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",  -- Bold X
-      [vim.diagnostic.severity.WARN]  = "",  -- Warning triangle
-      [vim.diagnostic.severity.INFO]  = "",  -- Info circle
-      [vim.diagnostic.severity.HINT]  = "",  -- Lightbulb
-    },
-  },
-})
-
--- Optional: Override colors for better contrast
-vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
-vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
-vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#50fa7b" })
-require('gitsigns').setup({
-  attach_to_untracked = true,  -- This will show signs for new files
-  -- ... rest of your config
-})
-EOF
-
 
 lua << EOF
 --[[
@@ -420,3 +374,97 @@ require('lualine').setup({
 })
 ]]
 EOF
+
+lua << EOF
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "",
+    },
+  },
+  virtual_text = {
+    format = function(diagnostic)
+      return diagnostic.message:gsub("%(fix available%)", "")
+    end,
+    prefix = "●",
+  },
+  underline = true,
+  update_in_insert = false,
+})
+
+-- DISABLE VIRTUAL TEXT ON STARTUP
+vim.diagnostic.config({ virtual_text = false })
+
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#50fa7b" })
+require('gitsigns').setup({
+  attach_to_untracked = true,  -- This will show signs for new files
+  -- ... rest of your config
+})
+EOF
+
+
+lua << EOF
+-- Store original handler
+local original_handler = vim.lsp.handlers['textDocument/publishDiagnostics']
+
+-- Override handler to replace "(fix available)" with an icon
+vim.lsp.handlers['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+  if result and result.diagnostics then
+    for _, diagnostic in ipairs(result.diagnostics) do
+      -- Replace "(fix available)" with a small icon
+      --diagnostic.message = diagnostic.message:gsub("%(fix available%)", "󰛩")
+      --diagnostic.message = diagnostic.message:gsub("%(fix available%)", "💡")
+      diagnostic.message = diagnostic.message:gsub("%(fix available%)", "")
+      -- Or try other icons: " 󰛩", " 󰃣", " 󰐃", " "
+    end
+  end
+  original_handler(err, result, ctx, config)
+end
+EOF
+
+
+lua << EOF
+require("trouble").setup({
+  modes = {
+    -- Create a new mode named 'my_flat_diagnostics'
+    diagnostics_flat = {
+      mode = "diagnostics", -- inherit from the base diagnostics mode
+      filter = { buf = 0 }, -- only show current buffer
+      groups = {},          -- empty groups list = flat view (no tree)
+      -- Optional: behavior settings
+      auto_close = true,    -- auto-close when no diagnostics are left
+      sort = { "severity", "pos" }, -- sort by error level then position
+    },
+  },
+})
+
+vim.keymap.set("n", "<leader>l", "<cmd>Trouble diagnostics_flat toggle<cr>", {
+  desc = "Flat Buffer Diagnostics",
+})
+
+--vim.opt.winblend = 10
+-- Force transparency on the main Trouble window and its border
+vim.api.nvim_set_hl(0, "TroubleNormal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "TroubleNormalNC", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "TroubleBorder", { bg = "NONE" })
+EOF
+
+lua << EOF
+-- Toggle with icon in statusline
+local vtext_on = false
+
+vim.keymap.set('n', '<leader>v', function()
+  vtext_on = not vtext_on
+  vim.diagnostic.config({ virtual_text = vtext_on })
+  
+  local icon = vtext_on and "󰎢" or "󰅙"
+  vim.notify(icon .. " Virtual text " .. (vtext_on and "on" or "off"), "info")
+end, { desc = "Toggle virtual text" })
+EOF
+
