@@ -1,6 +1,7 @@
 " powerline fonts
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 
 " basic settings
 syntax enable
@@ -379,4 +380,8 @@ vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
 vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#50fa7b" })
+require('gitsigns').setup({
+  attach_to_untracked = true,  -- This will show signs for new files
+  -- ... rest of your config
+})
 EOF
