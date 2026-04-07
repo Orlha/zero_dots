@@ -13,6 +13,8 @@ set scrolloff=7
 set foldmethod=indent
 set foldnestmax=1
 set number
+set cindent
+set smartindent
 set relativenumber
 set incsearch
 set ignorecase
@@ -47,7 +49,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/trouble.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -484,6 +486,6 @@ EOF
 
 
 lua << EOF
-require('nvim-treesitter').install { 'cpp', 'c' }
-vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+--require('nvim-treesitter').install { 'cpp', 'c' }
+--vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 EOF
