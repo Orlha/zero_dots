@@ -50,6 +50,7 @@ Plug 'Mofiqul/vscode.nvim'
 Plug 'ibhagwan/smartyank.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
+Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 
@@ -308,10 +309,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 
 -- List all warnings
-vim.keymap.set('n', '<leader>l', function()
-  vim.diagnostic.setqflist()
-  vim.cmd('copen')
-end)
 EOF
 
 
@@ -335,5 +332,51 @@ EOF
 
 
 lua << EOF
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:1"
+EOF
+
+
+lua << EOF
+-- Track state separately
+local warning_list_open = false
+
+vim.keymap.set('n', '<leader>l', function()
+  if warning_list_open then
+    vim.cmd('lclose')
+    warning_list_open = false
+  else
+    vim.diagnostic.setloclist()
+    vim.cmd('lopen')
+    warning_list_open = true
+  end
+end, { desc = "Toggle warning list" })
+
+-- Reset state if user closes manually
+vim.api.nvim_create_autocmd("WinClosed", {
+  pattern = "*",
+  callback = function()
+    warning_list_open = false
+  end,
+})
+EOF
+
+
+lua << EOF
+-- Set both icon AND custom colors for better visibility
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",  -- Bold X
+      [vim.diagnostic.severity.WARN]  = "",  -- Warning triangle
+      [vim.diagnostic.severity.INFO]  = "",  -- Info circle
+      [vim.diagnostic.severity.HINT]  = "",  -- Lightbulb
+    },
+  },
+})
+
+-- Optional: Override colors for better contrast
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#50fa7b" })
 EOF
