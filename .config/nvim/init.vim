@@ -318,7 +318,7 @@ EOF
 lua << EOF
 -- Add LSP toggle here (inside the same Lua block)
 local lsp_enabled = true
-vim.keymap.set('n', '<leader>l', function()
+vim.keymap.set('n', '<leader>t', function()
   if lsp_enabled then
     for _, client in pairs(vim.lsp.get_clients()) do
       client.stop()
