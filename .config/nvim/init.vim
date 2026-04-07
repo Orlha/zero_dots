@@ -468,3 +468,8 @@ vim.keymap.set('n', '<leader>v', function()
 end, { desc = "Toggle virtual text" })
 EOF
 
+
+lua << EOF
+-- Suppress deprecation warnings for diagnostic.goto_prev/goto_next
+vim.deprecate = function() end
+EOF
