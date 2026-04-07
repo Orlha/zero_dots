@@ -48,6 +48,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
 Plug 'Mofiqul/vscode.nvim'
 Plug 'ibhagwan/smartyank.nvim'
+Plug 'saghen/blink.cmp'
 
 call plug#end()
 
@@ -219,6 +220,7 @@ lua << EOF
         -- validate_yank = function() return vim.v.operator == "y" end,
     }
 
+
     vim.opt.clipboard = "unnamedplus"
     vim.opt.foldlevelstart = 99
     --vim.cmd.colorscheme "vscode"
@@ -250,3 +252,31 @@ highlight SignColumn guibg=NONE ctermbg=NONE
 hi NormalNC guibg=NONE ctermbg=NONE
 hi NvimTreeNormal guibg=NONE ctermbg=NONE
 hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
+
+
+
+" Configure blink.cmp
+lua << EOF
+require('blink.cmp').setup({
+  -- Use Lua fallback to avoid Rust compilation issues
+  fuzzy = { implementation = "lua" },
+  
+  -- Show completions automatically
+  completion = {
+    documentation = { auto_show = false },
+  },
+  
+  -- Key mappings (use <Tab> to navigate)
+  keymap = {
+    preset = 'default',
+    ['<Tab>'] = { 'select_next', 'fallback' },
+    ['<S-Tab>'] = { 'select_prev', 'fallback' },
+  },
+  
+  -- Where completions come from
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+})
+EOF
+
