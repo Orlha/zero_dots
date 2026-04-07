@@ -5,7 +5,6 @@ let g:airline#extensions#hunks#non_zero_only = 1
 
 " basic settings
 syntax enable
-filetype on
 filetype plugin indent on
 set list
 set listchars=tab:▸·,trail:~
@@ -13,8 +12,8 @@ set scrolloff=7
 set foldmethod=indent
 set foldnestmax=1
 set number
-set cindent
-set smartindent
+set nocindent
+set nosmartindent
 set relativenumber
 set incsearch
 set ignorecase
@@ -79,11 +78,7 @@ let g:cpp_concepts_highlight = 1
 lua << EOF
     -- c++ indentation
     vim.cmd([[
-        autocmd FileType cpp set cinoptions+=l1,N-s,h0
-        autocmd FileType cpp set cinoptions+=g0,h4,t0
-        autocmd FileType cpp set cinoptions+=+0
-        autocmd FileType cpp set cinoptions+=j1,(0,ws,Ws)
-        autocmd FileType cpp set cinoptions+=(m1)
+        autocmd FileType cpp set cinoptions+=l1,N-s,g0,h4,t0,+0,j1,(0,ws,Ws,)0,(m1)
     ]])
     -- tabs configuration
     vim.opt.tabstop = 4
@@ -448,7 +443,6 @@ end
 ]]
 EOF
 
-set nosmartindent
 lua << EOF
 require("trouble").setup({
   modes = {
