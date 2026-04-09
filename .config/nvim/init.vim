@@ -395,7 +395,7 @@ vim.diagnostic.config({
     },
   },
   --virtual_text = virtual_text_config,
-  underline = true,
+  underline = false,
   update_in_insert = false,
 })
 
