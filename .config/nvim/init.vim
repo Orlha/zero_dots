@@ -20,7 +20,10 @@ set ignorecase
 set smartcase
 set hlsearch
 set noshowmode
-set ttimeoutlen=0
+set ttimeout
+set ttimeoutlen=20
+set timeoutlen=3000
+
 
 " tabs angles
 let g:airline#extensions#tabline#enabled = 1
