@@ -52,7 +52,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/trouble.nvim'
-Plug 'rachartier/tiny-cmdline.nvim'
+"Plug 'rachartier/tiny-cmdline.nvim'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
@@ -489,9 +489,11 @@ EOF
 lua << EOF
 --require('nvim-treesitter').install { 'cpp', 'c' }
 --vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-vim.o.cmdheight = 0
+--vim.o.cmdheight = 0
+--[[
 require("vim._core.ui2").enable({})
 require('tiny-cmdline').setup({
   -- Your configuration options here
 })
+]]
 EOF
