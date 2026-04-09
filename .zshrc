@@ -16,7 +16,7 @@ alias nnn='nnn -e'
 
 
 export EDITOR=nvim
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 set -o emacs
 HISTFILE=~/.zsh_history
@@ -88,7 +88,8 @@ bindkey -s "^[[23~" ""
 bindkey -s "^[[24~" ""
 
 if [[ $distro == "ID=ubuntu" ]]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    source <(fzf --zsh)
 else
     source <(fzf --zsh)
 fi

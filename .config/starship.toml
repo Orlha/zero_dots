@@ -40,6 +40,9 @@ disabled = true
 [ruby]
 disabled = true
 
+[perl]
+disabled = true
+
 [java]
 disabled = true
 
