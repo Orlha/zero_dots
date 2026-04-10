@@ -108,7 +108,7 @@ lua << EOF
     map('n', '<leader>p', ':bp<CR>', { silent = true, desc = 'Previous buffer' })
     map('n', '<leader>s', ':noh<CR>', { silent = true, desc = 'Clear search highlight' })
     -- fzf lua mappings
-    vim.keymap.set('n', '<leader>fd', ':FzfLua lsp_workspace_symbols<CR>', { silent = true }) -- Symbols (workspace)
+    vim.keymap.set('n', '<leader>fd', ':FzfLua lsp_live_workspace_symbols<CR>', { silent = true }) -- Symbols (workspace)
     vim.keymap.set('n', '<leader>fs', ':FzfLua lsp_document_symbols<CR>', { silent = true }) -- Symbols (current buffer)
     vim.keymap.set('n', '<leader>ff', ':FzfLua files<CR>', { silent = true })      -- Files
     vim.keymap.set('n', '<leader>fg', ':FzfLua live_grep<CR>', { silent = true })  -- Grep
