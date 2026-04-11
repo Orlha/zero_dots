@@ -11,9 +11,7 @@ alias ls='ls --color=auto'
 alias ip='ip -c=auto'
 alias poweroff='poweroff --no-wall'
 alias reboot='reboot --no-wall'
-#alias vim='nvim'
 alias nnn='nnn -e'
-
 
 export EDITOR=nvim
 export PATH=$HOME/.local/bin:$PATH
@@ -56,10 +54,6 @@ bindkey "^[[5~" history-search-backward
 bindkey "^[[6~" history-search-forward
 bindkey '^k' up-line-or-history
 bindkey '^j' down-line-or-history
-#bindkey '\e[1;3C' history-beginning-search-backward
-#bindkey '\e[1;3D' history-beginning-search-forward
-#bindkey '\e[1;3A' history-beginning-search-backward
-#bindkey '\e[1;3B' history-beginning-search-forward
 
 bindkey -r "^[OP"
 bindkey -r "^[OQ"
@@ -87,12 +81,7 @@ bindkey -s "^[[21~" ""
 bindkey -s "^[[23~" ""
 bindkey -s "^[[24~" ""
 
-if [[ $distro == "ID=ubuntu" ]]; then
-    #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    source <(fzf --zsh)
-else
-    source <(fzf --zsh)
-fi
+source <(fzf --zsh)
 
 return
 
