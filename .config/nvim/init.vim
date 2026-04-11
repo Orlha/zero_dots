@@ -48,6 +48,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/trouble.nvim'
 "Plug 'rachartier/tiny-cmdline.nvim'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'folke/noice.nvim'
+Plug 'MunifTanjim/nui.nvim'
 call plug#end()
 
 set termguicolors
@@ -250,11 +252,11 @@ vim.keymap.set('n', '<leader>t', function()
             client.stop()
         end
         lsp_enabled = false
-        vim.notify("> LSP disabled", "info", { title = "LSP Toggle" })
+        vim.notify("> Disabled", "info", { title = "LSP Toggle" })
     else
         vim.lsp.enable('clangd')
         lsp_enabled = true
-        vim.notify("> LSP enabled", "info", { title = "LSP Toggle" })
+        vim.notify("> Enabled", "info", { title = "LSP Toggle" })
     end
 end, { desc = "Toggle LSP on/off" })
 EOF
@@ -290,10 +292,10 @@ vim.keymap.set('n', '<leader>v', function()
     vtext_enabled = not vtext_enabled
     if vtext_enabled then
         vim.diagnostic.config({ virtual_text = virtual_text_config })
-        vim.notify("> Virtual text enabled", "info", { title = "Diagnostics" })
+        vim.notify("> Enabled", "info", { title = "Virtual Text Toggle" })
     else
         vim.diagnostic.config({ virtual_text = false })
-        vim.notify("> Virtual text disabled", "info", { title = "Diagnostics" })
+        vim.notify("> Disabled", "info", { title = "Virtual Text Toggle" })
     end
 end, { desc = "Toggle virtual text" })
 EOF
@@ -333,3 +335,5 @@ lua << EOF
 -- Suppress deprecation warnings for diagnostic.goto_prev/goto_next
 vim.deprecate = function() end
 EOF
+
+lua require("noice").setup()
