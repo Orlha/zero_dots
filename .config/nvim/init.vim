@@ -37,7 +37,6 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-tree/nvim-web-devicons'
-Plug 'justinmk/vim-sneak'
 Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
 Plug 'Mofiqul/vscode.nvim'
@@ -46,10 +45,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'folke/trouble.nvim'
-"Plug 'rachartier/tiny-cmdline.nvim'
 "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
+Plug 'folke/flash.nvim'
 call plug#end()
 
 set termguicolors
@@ -191,7 +190,6 @@ lua << EOF
     vim.opt.foldlevelstart = 99
 EOF
 
-let g:sneak#label = 1
 autocmd VimLeave * set guicursor=a:hor20
 
 nnoremap <silent><F1>      :NvimTreeToggle<CR>
@@ -348,4 +346,31 @@ require("noice").setup({
         }
     },
 })
+EOF
+
+
+lua << EOF
+require("flash").setup({
+    --labels = "asdfghjkl",
+    modes = {
+        char = { enabled = false },
+        search = { enabled = false },
+    },
+})
+
+--vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end)
+--vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").jump({ search = { forward = false } }) end)
+-- s: Search forward only, current window
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+  require("flash").jump({
+    search = { forward = true, wrap = false, multi_window = false }
+  })
+end)
+
+-- S: Search backward only, current window
+vim.keymap.set({ "n", "x", "o" }, "S", function()
+  require("flash").jump({
+    search = { forward = false, wrap = false, multi_window = false }
+  })
+end)
 EOF
