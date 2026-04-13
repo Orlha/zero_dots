@@ -213,21 +213,24 @@ require('blink.cmp').setup({
         menu = {
             auto_show = false,
         },
+        list = { selection = { preselect = false } },
         documentation = { auto_show = false },
     },
     keymap = {
         preset = 'default',
         ['<Tab>'] = { 'select_next', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'fallback' },
-        ['<Space>'] = { 'select_and_accept', 'fallback' },
+        --['<Space>'] = { 'select_and_accept', 'fallback' },
         ['<C-Space>'] = { 'show', 'fallback' },
     },
     cmdline = {
         keymap = {
-            ['<Space>'] = { 'select_and_accept', 'fallback' },
+            --['<Space>'] = { 'select_and_accept', 'fallback' },
         },
         completion = {
-            menu = { auto_show = false } -- Useful for seeing options as you type in Noice
+            list = { selection = { preselect = false } },
+            menu = { auto_show = false },
+            ghost_text = { enabled = false },
         }
     },
     sources = {
