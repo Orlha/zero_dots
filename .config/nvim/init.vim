@@ -336,4 +336,16 @@ lua << EOF
 vim.deprecate = function() end
 EOF
 
-lua require("noice").setup()
+"lua require("noice").setup()
+lua << EOF
+require("noice").setup({
+    lsp = {
+        signature = {
+            enabled = false,
+        },
+        hover = {
+            enabled = false,
+        }
+    },
+})
+EOF
