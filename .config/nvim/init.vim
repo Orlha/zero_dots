@@ -255,6 +255,16 @@ vim.lsp.config.clangd = {
         "--pch-storage=memory",
         "-j=1",
     },
+    settings = {
+        clangd = {
+            InlayHints = {
+                Designators = true,
+                Enabled = true,
+                ParameterNames = true,
+                DeducedTypes = true,
+            },
+        },
+    },
     on_init = function(client)
         -- faster but not types :(
         --client.server_capabilities.semanticTokensProvider = nil
@@ -599,4 +609,5 @@ end
 customize_incsearch_for_noice()
 vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
 vim.opt.lazyredraw = true
+vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 EOF
