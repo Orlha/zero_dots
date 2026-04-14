@@ -252,8 +252,12 @@ vim.lsp.config.clangd = {
         "--completion-style=bundled",
         "--header-insertion=never",
         "--malloc-trim",
+        "--pch-storage=memory",
         "-j=1",
     },
+    on_init = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+    end,
     filetypes = { "c", "cpp" },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
 }
