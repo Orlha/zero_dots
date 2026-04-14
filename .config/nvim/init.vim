@@ -576,4 +576,6 @@ local customize_incsearch_for_noice = function()
     })
 end
 customize_incsearch_for_noice()
+vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
+vim.opt.lazyredraw = true
 EOF
