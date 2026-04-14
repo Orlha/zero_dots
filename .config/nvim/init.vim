@@ -30,16 +30,15 @@ let g:airline#extensions#tabline#left_alt_sep = ''
 call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'EdenEast/nightfox.nvim'
+"Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'EdenEast/nightfox.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'windwp/nvim-autopairs'
 Plug 'chrisgrieser/nvim-spider'
-Plug 'Mofiqul/vscode.nvim'
+"Plug 'Mofiqul/vscode.nvim'
 Plug 'ibhagwan/smartyank.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'saghen/blink.cmp'
@@ -53,13 +52,13 @@ call plug#end()
 
 set termguicolors
 set background=dark
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'danetta_theme'
 
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_concepts_highlight = 1
+"let g:cpp_class_scope_highlight = 1
+"let g:cpp_member_variable_highlight = 1
+"let g:cpp_class_decl_highlight = 1
+"let g:cpp_experimental_simple_template_highlight = 1
+"let g:cpp_concepts_highlight = 1
 
 lua << EOF
     vim.cmd([[
@@ -102,61 +101,26 @@ lua << EOF
     vim.g.airline_mode_map = {
         ['n']  = 'NORMAL ',
         ['i']  = 'INSERT ',
+        ['R']  = 'REPLACE ',
         ['c']  = 'COMMAND ',
         ['v']  = 'VISUAL ',
         ['V']  = 'V·LINE ',
         [''] = 'V·BLOCK ',
         ['s']  = 'SELECT ',
+        ['t']  = 'TERMINAL ',
     }
-
-    local c = require('vscode.colors').get_colors()
-    require('vscode').setup({
-    -- Alternatively set style in setup
-    -- style = 'light'
-
-    -- Enable transparent background
-    transparent = true,
-
-    -- Enable italic comment
-    --italic_comments = true,
-
-    -- Enable italic inlay type hints
-    --italic_inlayhints = true,
-
-    -- Underline `@markup.link.*` variants
-    underline_links = true,
-
-    -- Disable nvim-tree background color
-    disable_nvimtree_bg = true,
-
-    -- Apply theme colors to terminal
-    terminal_colors = true,
-
-    -- Override colors (see ./lua/vscode/colors.lua)
-    color_overrides = {
-        --vscLineNumber = '#FFFFFF',
-    },
-
-    -- Override highlight groups (see ./lua/vscode/theme.lua)
-    group_overrides = {
-        -- this supports the same val table as vim.api.nvim_set_hl
-        -- use colors from this colorscheme by requiring vscode.colors!
-        Cursor = { fg=c.vscDarkBlue, bg=c.vscLightGreen, bold=true },
-    }
-    })
 
     require("catppuccin").setup({
         no_italic = true,
     })
+
     vim.cmd.colorscheme "catppuccin-mocha"
-    --vim.cmd.colorscheme "vscode"
 
     local highlights = {
         FzfLuaNormal       = { bg = "NONE" },
         FzfLuaBorder       = { bg = "NONE" },
         FzfLuaPreviewNormal = { bg = "NONE" },
         FzfLuaPreviewBorder = { bg = "NONE" },
-        -- Optional: clear the backdrop if you use it
         FzfLuaBackdrop      = { bg = "NONE" },
     }
 
@@ -164,18 +128,22 @@ lua << EOF
         vim.api.nvim_set_hl(0, group, opts)
     end
 
+    vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#ff7f00', fg = '#000000', bold = false })
+    vim.api.nvim_set_hl(0, 'Search', { bg = '#606060', fg = '#000000' })
+    vim.api.nvim_set_hl(0, 'CurSearch', { bg = '#D0D0D0', fg = '#000000' })
+    vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#D0D0D0', fg = '#000000' })
+
     require('smartyank').setup {
         highlight = {
             enabled = true,
-            higroup = "IncSearch",
-            timeout = 1000,
+            higroup = "SmartYank",
+            timeout = 500,
         },
         clipboard = {
             enabled = true
         },
         tmux = {
             enabled = true,
-            -- remove `-w` to disable copy to host client's clipboard
             cmd = { 'tmux', 'set-buffer', '-w' }
         },
         osc52 = {
@@ -255,18 +223,6 @@ vim.lsp.config.clangd = {
         "--pch-storage=memory",
         "-j=1",
     },
-    --[[
-    settings = {
-        clangd = {
-            InlayHints = {
-                Designators = true,
-                Enabled = true,
-                ParameterNames = true,
-                DeducedTypes = true,
-            },
-        },
-    },
-    ]]
     on_init = function(client)
         -- faster but not types :(
         --client.server_capabilities.semanticTokensProvider = nil
@@ -277,8 +233,8 @@ vim.lsp.config.clangd = {
 
 vim.lsp.handlers["textDocument/semanticTokens/full"] = vim.lsp.with(
   vim.lsp.handlers["textDocument/semanticTokens/full"], {
-    -- Only update every 2 seconds instead of constantly
-    debounce = 2000,
+    -- Only update every 3 seconds instead of constantly
+    debounce = 3000,
   }
 )
 
@@ -286,6 +242,7 @@ vim.lsp.enable('clangd')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 EOF
 
 
@@ -310,7 +267,6 @@ EOF
 
 lua << EOF
 vim.opt.signcolumn = "yes:1"
-vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 EOF
 
 lua << EOF
@@ -385,6 +341,9 @@ EOF
 "lua require("noice").setup()
 lua << EOF
 require("noice").setup({
+    messages = {
+        view_search = false,
+    },
     lsp = {
         signature = {
             enabled = false,
@@ -399,7 +358,6 @@ EOF
 
 lua << EOF
 require("flash").setup({
-    --labels = "asdfghjkl",
     modes = {
         char = { enabled = false },
         search = { enabled = false },
@@ -408,25 +366,24 @@ require("flash").setup({
 
 --vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end)
 --vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").jump({ search = { forward = false } }) end)
+
 -- s: Search forward only, current window
 vim.keymap.set({ "n", "x", "o" }, "s", function()
-  require("flash").jump({
-    search = { forward = true, wrap = false, multi_window = false }
-  })
+    require("flash").jump({
+        search = { forward = true, wrap = false, multi_window = false }
+    })
 end)
 
 -- S: Search backward only, current window
 vim.keymap.set({ "n", "x", "o" }, "S", function()
-  require("flash").jump({
-    search = { forward = false, wrap = false, multi_window = false }
-  })
+    require("flash").jump({
+        search = { forward = false, wrap = false, multi_window = false }
+    })
 end)
 EOF
 
 
-
-
-" magic flicking fix for incsearch with noice from eyalz800
+" magic flickering fix for incsearch with noice from eyalz800
 " https://github.com/folke/noice.nvim/issues/679
 lua << EOF
 local customize_incsearch_for_noice = function()
@@ -609,7 +566,7 @@ local customize_incsearch_for_noice = function()
     })
 end
 customize_incsearch_for_noice()
-vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
-vim.opt.lazyredraw = true
+--vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
+--vim.opt.lazyredraw = true
 --vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 EOF
