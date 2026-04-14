@@ -245,7 +245,15 @@ EOF
 
 lua << EOF
 vim.lsp.config.clangd = {
-    cmd = { "clangd" },
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--limit-results=50",
+        "--completion-style=bundled",
+        "--header-insertion=never",
+        "--malloc-trim",
+        "-j=1",
+    },
     filetypes = { "c", "cpp" },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
 }
@@ -255,6 +263,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 EOF
+
 
 lua << EOF
 -- Add LSP toggle here (inside the same Lua block)
