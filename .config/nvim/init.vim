@@ -256,11 +256,19 @@ vim.lsp.config.clangd = {
         "-j=1",
     },
     on_init = function(client)
-        client.server_capabilities.semanticTokensProvider = nil
+        -- faster but not types :(
+        --client.server_capabilities.semanticTokensProvider = nil
     end,
     filetypes = { "c", "cpp" },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
 }
+
+vim.lsp.handlers["textDocument/semanticTokens/full"] = vim.lsp.with(
+  vim.lsp.handlers["textDocument/semanticTokens/full"], {
+    -- Only update every 2 seconds instead of constantly
+    debounce = 2000, 
+  }
+)
 
 vim.lsp.enable('clangd')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
