@@ -105,7 +105,7 @@ lua << EOF
         ['c']  = 'COMMAND ',
         ['v']  = 'VISUAL ',
         ['V']  = 'V·LINE ',
-        [''] = 'V·BLOCK ',
+        [''] = 'V·BLOCK ',
         ['s']  = 'SELECT ',
         ['t']  = 'TERMINAL ',
     }
@@ -212,7 +212,7 @@ require('blink.cmp').setup({
 EOF
 
 lua << EOF
-vim.lsp.config.clangd = {
+vim.lsp.config('clangd', {
     cmd = {
         "clangd",
         "--background-index",
@@ -223,22 +223,14 @@ vim.lsp.config.clangd = {
         "--pch-storage=memory",
         "-j=1",
     },
-    on_init = function(client)
-        -- faster but not types :(
-        --client.server_capabilities.semanticTokensProvider = nil
-    end,
     filetypes = { "c", "cpp" },
+    flags = {
+        debounce_text_changes = 5000,
+    },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
-}
-
-vim.lsp.handlers["textDocument/semanticTokens/full"] = vim.lsp.with(
-  vim.lsp.handlers["textDocument/semanticTokens/full"], {
-    -- Only update every 3 seconds instead of constantly
-    debounce = 3000,
-  }
-)
-
+})
 vim.lsp.enable('clangd')
+
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
