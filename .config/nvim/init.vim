@@ -251,10 +251,11 @@ vim.lsp.config.clangd = {
         "--limit-results=50",
         "--completion-style=bundled",
         "--header-insertion=never",
-        "--malloc-trim",
+        --"--malloc-trim",
         "--pch-storage=memory",
         "-j=1",
     },
+    --[[
     settings = {
         clangd = {
             InlayHints = {
@@ -265,6 +266,7 @@ vim.lsp.config.clangd = {
             },
         },
     },
+    ]]
     on_init = function(client)
         -- faster but not types :(
         --client.server_capabilities.semanticTokensProvider = nil
@@ -276,7 +278,7 @@ vim.lsp.config.clangd = {
 vim.lsp.handlers["textDocument/semanticTokens/full"] = vim.lsp.with(
   vim.lsp.handlers["textDocument/semanticTokens/full"], {
     -- Only update every 2 seconds instead of constantly
-    debounce = 2000, 
+    debounce = 2000,
   }
 )
 
@@ -609,5 +611,5 @@ end
 customize_incsearch_for_noice()
 vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
 vim.opt.lazyredraw = true
-vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
+--vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 EOF
