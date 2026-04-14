@@ -220,6 +220,7 @@ require('blink.cmp').setup({
         preset = 'default',
         ['<Tab>'] = { 'select_next', 'fallback' },
         ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        ['<Space>'] = { 'accept', 'fallback' },
         --['<Space>'] = { 'select_and_accept', 'fallback' },
         ['<C-Space>'] = { 'show', 'fallback' },
     },
@@ -227,6 +228,7 @@ require('blink.cmp').setup({
         keymap = {
             ['<Tab>'] = { 'select_next', 'fallback' },
             ['<S-Tab>'] = { 'select_prev', 'fallback' },
+            ['<Space>'] = { 'accept', 'fallback' },
             --['<Space>'] = { 'select_and_accept', 'fallback' },
         },
         completion = {
