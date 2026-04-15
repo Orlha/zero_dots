@@ -566,4 +566,5 @@ customize_incsearch_for_noice()
 --vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 vim.opt.guicursor:remove { 't:block-blinkon500-blinkoff500-TermCursor' }
 --vim.opt.guicursor = "a:hor20"
+vim.g.airline_section_b = [[%{gitbranch#name() == '' ? '' : ' ' . gitbranch#name()}]]
 EOF
