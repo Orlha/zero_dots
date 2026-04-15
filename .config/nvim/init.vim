@@ -561,4 +561,6 @@ customize_incsearch_for_noice()
 --vim.keymap.set('i', '<Esc>', '<cmd>stopinsert<CR>')
 --vim.opt.lazyredraw = true
 --vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
+vim.opt.guicursor:remove { 't:block-blinkon500-blinkoff500-TermCursor' }
+--vim.opt.guicursor = "a:hor20"
 EOF
