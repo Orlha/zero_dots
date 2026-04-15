@@ -48,6 +48,7 @@ Plug 'folke/trouble.nvim'
 Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'folke/flash.nvim'
+Plug 'itchyny/vim-gitbranch'
 call plug#end()
 
 set termguicolors
