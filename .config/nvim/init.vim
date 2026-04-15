@@ -1,9 +1,3 @@
-let g:airline_powerline_fonts = 1
-let g:airline_skip_empty_sections = 1
-let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#branch#enabled = 1
-
-
 syntax enable
 filetype plugin indent on
 set list
@@ -23,11 +17,6 @@ set noshowmode
 set ttimeout
 set ttimeoutlen=10
 set timeoutlen=3000
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
 
 call plug#begin()
 Plug 'vim-airline/vim-airline'
@@ -55,7 +44,6 @@ call plug#end()
 
 set termguicolors
 set background=dark
-let g:airline_theme = 'danetta_theme'
 
 "let g:cpp_class_scope_highlight = 1
 "let g:cpp_member_variable_highlight = 1
@@ -78,13 +66,13 @@ lua << EOF
     vim.opt.termguicolors = true
     vim.opt.splitright = true
     vim.opt.splitbelow = true
-    local map = vim.keymap.set
-    map('n', '<leader>w', ':w<CR>', { silent = true, desc = 'Save file' })
-    map('n', '<leader>q', ':bd<CR>', { silent = true, desc = 'Close buffer' })
-    map('n', '<leader>Q', ':bd<CR>', { silent = true, desc = 'Force close buffer' })
-    map('n', '<leader>n', ':bn<CR>', { silent = true, desc = 'Next buffer' })
-    map('n', '<leader>p', ':bp<CR>', { silent = true, desc = 'Previous buffer' })
-    map('n', '<leader>s', ':noh<CR>', { silent = true, desc = 'Clear search highlight' })
+    -- buffers
+    vim.keymap.set('n', '<leader>w', ':w<CR>', { silent = true, desc = 'save' })
+    vim.keymap.set('n', '<leader>q', ':bd<CR>', { silent = true, desc = 'close buffer' })
+    vim.keymap.set('n', '<leader>Q', ':bd!<CR>', { silent = true, desc = 'force close buffer' })
+    vim.keymap.set('n', '<leader>n', ':bn<CR>', { silent = true, desc = 'next buffer' })
+    vim.keymap.set('n', '<leader>p', ':bp<CR>', { silent = true, desc = 'previous buffer' })
+    vim.keymap.set('n', '<leader>s', ':noh<CR>', { silent = true, desc = 'clear search highlight' })
     -- fzf lua
     vim.keymap.set('n', '<leader>fd', ':FzfLua lsp_live_workspace_symbols<CR>', { silent = true }) -- Symbols (workspace)
     vim.keymap.set('n', '<leader>fs', ':FzfLua lsp_document_symbols<CR>', { silent = true }) -- Symbols (current buffer)
@@ -302,6 +290,7 @@ vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#ffb86c", bold = true })
 vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#8be9fd" })
 vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#50fa7b" })
+
 require('gitsigns').setup({
     attach_to_untracked = true,
 })
@@ -351,6 +340,7 @@ require("noice").setup({
 EOF
 
 
+if 1
 lua << EOF
 require("flash").setup({
     modes = {
@@ -376,6 +366,7 @@ vim.keymap.set({ "n", "x", "o" }, "S", function()
     })
 end)
 EOF
+endif
 
 
 " magic flickering fix for incsearch with noice from eyalz800
@@ -566,5 +557,21 @@ customize_incsearch_for_noice()
 --vim.keymap.set('n', '<leader>h', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end)
 vim.opt.guicursor:remove { 't:block-blinkon500-blinkoff500-TermCursor' }
 --vim.opt.guicursor = "a:hor20"
-vim.g.airline_section_b = [[%{gitbranch#name() == '' ? '' : ' ' . gitbranch#name()}]]
+vim.g['airline_powerline_fonts'] = 1
+vim.g['airline_skip_empty_sections'] = 1
+vim.g['airline#extensions#hunks#non_zero_only'] = 1
+vim.g['airline#extensions#branch#enabled'] = 1
+vim.g['airline#extensions#tabline#enabled'] = 1
+vim.g['airline#extensions#tabline#show_buffers'] = 1
+vim.g['airline#extensions#tabline#left_sep'] = ''
+vim.g['airline#extensions#tabline#left_alt_sep'] = ''
+vim.g['airline#extensions#branch#custom_head'] = 'gitbranch#name'
+vim.g['airline#extensions#hunks#hunk_source'] = 'gitsigns'
+vim.api.nvim_create_autocmd("User", {
+    pattern = "GitSignsUpdate", -- Note: Case sensitive
+    callback = function()
+        vim.cmd("redrawstatus")
+    end,
+})
+vim.g['airline_theme'] = 'danetta_theme'
 EOF
