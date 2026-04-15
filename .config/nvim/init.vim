@@ -19,7 +19,7 @@ set smartcase
 set hlsearch
 set noshowmode
 set ttimeout
-set ttimeoutlen=20
+set ttimeoutlen=10
 set timeoutlen=3000
 
 let g:airline#extensions#tabline#enabled = 1
