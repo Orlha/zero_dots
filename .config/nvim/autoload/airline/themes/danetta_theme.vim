@@ -26,3 +26,6 @@ let g:airline#themes#danetta_theme#palette.insert_modified = { 'airline_c': s:ne
 let g:airline#themes#danetta_theme#palette.visual_modified = { 'airline_c': s:new_visual }
 let g:airline#themes#danetta_theme#palette.replace_modified = { 'airline_c': s:new_replace }
 let g:airline#themes#danetta_theme#palette.inactive_modified = { 'airline_c': s:new_inactive }
+
+let g:airline#themes#danetta_theme#palette.replace.airline_z = g:airline#themes#danetta_theme#palette.replace.airline_a
+let g:airline#themes#danetta_theme#palette.replace_modified.airline_z = g:airline#themes#danetta_theme#palette.replace.airline_a
