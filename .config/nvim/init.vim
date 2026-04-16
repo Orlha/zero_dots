@@ -15,7 +15,7 @@ set smartcase
 set hlsearch
 set noshowmode
 set ttimeout
-set ttimeoutlen=10
+set ttimeoutlen=0
 set timeoutlen=3000
 
 call plug#begin()
@@ -40,6 +40,7 @@ Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'folke/flash.nvim'
 Plug 'itchyny/vim-gitbranch'
+Plug 'stevearc/dressing.nvim'
 call plug#end()
 
 set termguicolors
@@ -574,4 +575,24 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 vim.g['airline_theme'] = 'danetta_theme'
+
+require('dressing').setup({
+select = {
+    enabled = true,
+    backend = { "fzf_lua" },
+    fzf_lua = {
+        winopts = {
+            height = 0.5,
+            width = 0.4,
+            row = 0.5,
+            col = 0.5,
+            preview = {
+                layout = "vertical",
+                vertical = "down:50%",
+                hidden = false,
+            },
+        },
+    },
+}
+})
 EOF
