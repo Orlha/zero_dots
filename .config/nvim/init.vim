@@ -15,7 +15,7 @@ set smartcase
 set hlsearch
 set noshowmode
 set ttimeout
-set ttimeoutlen=0
+set ttimeoutlen=10
 set timeoutlen=3000
 
 call plug#begin()
