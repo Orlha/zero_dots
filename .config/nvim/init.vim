@@ -596,3 +596,14 @@ select = {
 }
 })
 EOF
+
+lua << EOF
+require('fzf-lua').setup({
+  winopts = {
+    height     = 0.65,
+    width      = 0.65,
+    row        = 0.5,
+    col        = 0.5,
+  },
+})
+EOF
