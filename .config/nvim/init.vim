@@ -41,16 +41,61 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'folke/flash.nvim'
 Plug 'itchyny/vim-gitbranch'
 "Plug 'stevearc/dressing.nvim'
+Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 set termguicolors
 set background=dark
 
-"let g:cpp_class_scope_highlight = 1
-"let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
-"let g:cpp_experimental_simple_template_highlight = 1
-"let g:cpp_concepts_highlight = 1
+lua << EOF
+vim.cmd.colorscheme('seoul256')
+vim.cmd('highlight clear StatusLine')
+EOF
+
+
+lua << EOF
+vim.cmd([[
+" Sign column icons
+highlight GitSignsAdd guifg=#99c794 guibg=NONE
+highlight GitSignsChange guifg=#fac863 guibg=NONE
+highlight GitSignsDelete guifg=#ec5f67 guibg=NONE
+highlight GitSignsChangedelete guifg=#fac863 guibg=NONE
+highlight GitSignsTopdelete guifg=#ec5f67 guibg=NONE
+highlight GitSignsUntracked guifg=#5fafd7 guibg=NONE
+
+" Line number column (when `numhl` is enabled)
+highlight GitSignsAddNr guifg=#99c794 guibg=NONE
+highlight GitSignsChangeNr guifg=#fac863 guibg=NONE
+highlight GitSignsDeleteNr guifg=#ec5f67 guibg=NONE
+highlight GitSignsChangedeleteNr guifg=#fac863 guibg=NONE
+highlight GitSignsTopdeleteNr guifg=#ec5f67 guibg=NONE
+highlight GitSignsUntrackedNr guifg=#5fafd7 guibg=NONE
+
+" Line highlights (the code lines themselves)
+highlight GitSignsAddLn guibg=NONE
+highlight GitSignsChangeLn guibg=NONE
+highlight GitSignsDeleteLn guibg=NONE
+highlight GitSignsChangedeleteLn guibg=NONE
+highlight GitSignsTopdeleteLn guibg=NONE
+highlight GitSignsUntrackedLn guibg=NONE
+
+" Preview window (when using `:Gitsigns preview_hunk`)
+highlight GitSignsAddPreview guibg=NONE
+highlight GitSignsDeletePreview guibg=NONE
+highlight GitSignsCurrentLineBlame guifg=#6c6c6c guibg=NONE
+
+" Staged hunks (when `staged` highlight is enabled)
+highlight GitSignsStagedAdd guifg=#99c794 guibg=NONE
+highlight GitSignsStagedChange guifg=#5fafd7 guibg=NONE
+highlight GitSignsStagedDelete guifg=#ec5f67 guibg=NONE
+highlight GitSignsStagedChangedelete guifg=#5fafd7 guibg=NONE
+highlight GitSignsStagedTopdelete guifg=#ec5f67 guibg=NONE
+
+" Virtual text (for inline blame)
+highlight GitSignsVirtualText guifg=#6c6c6c guibg=NONE
+]])
+EOF
+
 
 lua << EOF
     vim.cmd([[
@@ -102,11 +147,12 @@ lua << EOF
         ['t']  = 'TERMINAL ',
     }
 
+    --[[
     require("catppuccin").setup({
         no_italic = true,
     })
-
     vim.cmd.colorscheme "catppuccin-mocha"
+    ]]
 
     local highlights = {
         FzfLuaNormal       = { bg = "NONE" },
