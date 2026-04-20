@@ -41,18 +41,21 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'folke/flash.nvim'
 Plug 'itchyny/vim-gitbranch'
 "Plug 'stevearc/dressing.nvim'
-Plug 'junegunn/seoul256.vim'
+"Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 set termguicolors
 set background=dark
 
+if 0
 lua << EOF
 vim.cmd.colorscheme('seoul256')
 vim.cmd('highlight clear StatusLine')
 EOF
+endif
 
 
+if 0
 lua << EOF
 vim.cmd([[
 " Sign column icons
@@ -95,6 +98,7 @@ highlight GitSignsStagedTopdelete guifg=#ec5f67 guibg=NONE
 highlight GitSignsVirtualText guifg=#6c6c6c guibg=NONE
 ]])
 EOF
+endif
 
 
 lua << EOF
@@ -147,12 +151,10 @@ lua << EOF
         ['t']  = 'TERMINAL ',
     }
 
-    --[[
     require("catppuccin").setup({
         no_italic = true,
     })
     vim.cmd.colorscheme "catppuccin-mocha"
-    ]]
 
     local highlights = {
         FzfLuaNormal       = { bg = "NONE" },
