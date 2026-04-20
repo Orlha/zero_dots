@@ -351,6 +351,12 @@ vim.keymap.set('n', '<leader>v', function()
     vtext_enabled = not vtext_enabled
     if vtext_enabled then
         vim.diagnostic.config({ virtual_text = virtual_text_config })
+        --[[
+        vim.diagnostic.config({
+            virtual_text = false,
+            virtual_lines = { only_current_line = true },
+        })
+        ]]
         vim.notify("> Enabled", "info", { title = "Virtual Text Toggle" })
     else
         vim.diagnostic.config({ virtual_text = false })
@@ -715,3 +721,9 @@ vim.api.nvim_set_hl(0, 'TroublePreview', {
 ]]
 --vim.o.laststatus = 3
 EOF
+
+autocmd WinNew *
+            \ let win = nvim_win_get_config(win_getid(expand('<amatch>'))) |
+            \ if !empty(win.relative) |
+            \     let w:airline_disable_statusline = 1 |
+            \ endif
