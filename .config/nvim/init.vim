@@ -671,3 +671,18 @@ require('fzf-lua').register_ui_select({
     },
 })
 EOF
+
+
+lua << EOF
+vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TroubleNormal', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TroubleLine', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TroubleLocation', { bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'TroublePreview', { 
+  bg = 'NONE',
+  fg = '#d7af5f',      -- Gold/orange foreground
+  underline = true,     -- Underline instead of background
+})
+EOF
