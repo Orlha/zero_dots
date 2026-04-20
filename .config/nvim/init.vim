@@ -601,12 +601,13 @@ EOF
 
 lua << EOF
 require('fzf-lua').setup({
-  winopts = {
-    height     = 0.65,
-    width      = 0.65,
-    row        = 0.5,
-    col        = 0.5,
-  },
+    winopts = {
+        height     = 0.65,
+        width      = 0.65,
+        row        = 0.5,
+        col        = 0.5,
+    },
+    file_ignore_patterns = { "build/", },
 })
 require('fzf-lua').register_ui_select({
     winopts = {
