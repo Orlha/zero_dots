@@ -22,7 +22,7 @@ call plug#begin()
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-tree/nvim-tree.lua'
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+"Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 "Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'EdenEast/nightfox.nvim'
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
@@ -42,10 +42,30 @@ Plug 'folke/flash.nvim'
 Plug 'itchyny/vim-gitbranch'
 "Plug 'stevearc/dressing.nvim'
 "Plug 'junegunn/seoul256.vim'
+Plug 'ribru17/bamboo.nvim'
 call plug#end()
 
 set termguicolors
 set background=dark
+
+
+lua << EOF
+require('bamboo').setup({
+    transparent = true,
+    code_style = {
+        comments = { italic = false },
+        conditionals = { italic = false },
+        keywords = {},
+        functions = {},
+        namespaces = { italic = false },
+        parameters = { italic = false },
+        strings = {},
+        variables = {},
+    },
+})
+require('bamboo').load()
+EOF
+
 
 if 0
 lua << EOF
@@ -151,10 +171,12 @@ lua << EOF
         ['t']  = 'TERMINAL ',
     }
 
+    --[[
     require("catppuccin").setup({
         no_italic = true,
     })
     vim.cmd.colorscheme "catppuccin-mocha"
+    ]]
 
     local highlights = {
         FzfLuaNormal       = { bg = "NONE" },
