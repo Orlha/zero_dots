@@ -339,6 +339,9 @@ vim.diagnostic.config({
             [vim.diagnostic.severity.HINT]  = "",
         },
     },
+    float = {
+        border = "rounded",
+    },
     underline = false,
     update_in_insert = false,
 })
@@ -638,6 +641,7 @@ vim.g['airline#extensions#tabline#left_sep'] = ''
 vim.g['airline#extensions#tabline#left_alt_sep'] = ''
 vim.g['airline#extensions#branch#custom_head'] = 'gitbranch#name'
 vim.g['airline#extensions#hunks#hunk_source'] = 'gitsigns'
+--vim.g.airline_exclude_filetypes = {'vim-diagnostic-float', 'qf', 'netrw', 'scratch'}
 vim.api.nvim_create_autocmd("User", {
     pattern = "GitSignsUpdate", -- Note: Case sensitive
     callback = function()
@@ -696,15 +700,18 @@ EOF
 
 
 lua << EOF
-vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'TroubleNormal', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'TroubleLine', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'TroubleLocation', { bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'TroublePreview', { 
+--vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
+--vim.api.nvim_set_hl(0, 'TroubleNormal', { bg = 'NONE' })
+--vim.api.nvim_set_hl(0, 'TroubleLine', { bg = 'NONE' })
+--vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'NONE' })
+--vim.api.nvim_set_hl(0, 'TroublePreview', { bg = 'NONE' })
+--vim.api.nvim_set_hl(0, 'TroubleLocation', { bg = 'NONE' })
+--[[
+vim.api.nvim_set_hl(0, 'TroublePreview', {
   bg = 'NONE',
   fg = '#d7af5f',      -- Gold/orange foreground
   underline = true,     -- Underline instead of background
 })
+]]
+--vim.o.laststatus = 3
 EOF
