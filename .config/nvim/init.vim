@@ -40,7 +40,7 @@ Plug 'folke/noice.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'folke/flash.nvim'
 Plug 'itchyny/vim-gitbranch'
-Plug 'stevearc/dressing.nvim'
+"Plug 'stevearc/dressing.nvim'
 call plug#end()
 
 set termguicolors
@@ -576,6 +576,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 vim.g['airline_theme'] = 'danetta_theme'
 
+--[[
 require('dressing').setup({
 select = {
     enabled = true,
@@ -595,6 +596,7 @@ select = {
     },
 }
 })
+]]
 EOF
 
 lua << EOF
@@ -605,5 +607,18 @@ require('fzf-lua').setup({
     row        = 0.5,
     col        = 0.5,
   },
+})
+require('fzf-lua').register_ui_select({
+    winopts = {
+        height = 0.5,
+        width = 0.4,
+        row = 0.5,
+        col = 0.5,
+        preview = {
+            layout = "vertical",
+            vertical = "down:50%",
+            hidden = false,
+        },
+    },
 })
 EOF
