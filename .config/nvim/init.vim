@@ -66,6 +66,13 @@ require('bamboo').setup({
         strings = {},
         variables = {},
     },
+    highlights = {
+        ['@lsp.type.method'] = { link = '@function.method' },
+        ['@lsp.mod.readonly'] = { link = '@function.method' },
+        ['@lsp.typemod.method.readonly'] = { link = '@function.method' },
+        ['@lsp.typemod.method.classScope'] = { link = '@function.method' },
+        ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.method' },
+    },
 })
 require('bamboo').load()
 EOF
