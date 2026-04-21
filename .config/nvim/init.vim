@@ -739,6 +739,7 @@ vim.api.nvim_set_hl(0, 'TroublePreview', {
 })
 ]]
 --vim.o.laststatus = 3
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true })
 EOF
 
 autocmd WinNew *
