@@ -66,11 +66,19 @@ require('bamboo').setup({
         strings = {},
         variables = {},
     },
+        --[[
+        ['@lsp.mod.readonly'] = { link = 'NONE' },
+        ['@lsp.mod.classScope'] = { link = 'NONE' },
+        ['@lsp.mod.defaultLibrary'] = { link = 'NONE' },
+        ['@lsp.typemod.method.readonly'] = { link = 'NONE' },
+        ['@lsp.typemod.method.classScope'] = { link = 'NONE' },
+        ['@lsp.typemod.method.defaultLibrary'] = { link = 'NONE' },
+        ]]
     highlights = {
-        ['@lsp.type.method'] = { link = '@function.method' },
-        ['@lsp.mod.readonly'] = { link = '@function.method' },
+        --['@lsp.type.method'] = { link = '@function.method' },
+        --['@lsp.mod.readonly'] = { link = '@function.method' },
+        --['@lsp.typemod.method.classScope'] = { link = '@function.method' },
         ['@lsp.typemod.method.readonly'] = { link = '@function.method' },
-        ['@lsp.typemod.method.classScope'] = { link = '@function.method' },
         ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.method' },
     },
 })
