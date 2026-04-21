@@ -52,6 +52,10 @@ set background=dark
 lua << EOF
 require('bamboo').setup({
     transparent = true,
+    colors = {
+        cyan = '#a7cdcd',
+        light_blue = '#56c7ef',
+    },
     code_style = {
         comments = { italic = false },
         conditionals = { italic = false },
