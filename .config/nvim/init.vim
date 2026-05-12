@@ -259,6 +259,11 @@ hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
 lua << EOF
 require('blink.cmp').setup({
     fuzzy = { implementation = "lua" },
+    signature = {
+        trigger = {
+            enabled = false,
+        },
+    },
     completion = {
         menu = {
             auto_show = false,
