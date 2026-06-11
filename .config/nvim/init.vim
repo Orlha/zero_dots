@@ -241,7 +241,7 @@ lua << EOF
     }
 
     --vim.opt.clipboard = "unnamedplus"
-    vim.opt.foldlevelstart = 99
+    --vim.opt.foldlevelstart = 99
 EOF
 
 autocmd VimLeave * set guicursor=a:hor20
