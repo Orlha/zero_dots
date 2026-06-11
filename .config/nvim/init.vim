@@ -17,6 +17,7 @@ set noshowmode
 set ttimeout
 set ttimeoutlen=10
 set timeoutlen=3000
+set foldlevelstart=0
 
 call plug#begin()
 Plug 'vim-airline/vim-airline'
@@ -76,6 +77,9 @@ require('bamboo').setup({
         ['@lsp.typemod.method.defaultLibrary'] = { link = 'NONE' },
         ]]
     highlights = {
+        Folded = {
+            bg = '#1a1b26', fg = '#737373'
+        },
         --['@lsp.type.method'] = { link = '@function.method' },
         --['@lsp.mod.readonly'] = { link = '@function.method' },
         --['@lsp.typemod.method.classScope'] = { link = '@function.method' },
