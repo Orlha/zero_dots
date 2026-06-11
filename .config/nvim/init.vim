@@ -312,11 +312,11 @@ vim.lsp.config('clangd', {
         "--header-insertion=never",
         --"--malloc-trim",
         "--pch-storage=memory",
-        "-j=1",
+        "-j=4",
     },
     filetypes = { "c", "cpp" },
     flags = {
-        debounce_text_changes = 5000,
+        debounce_text_changes = 1000,
     },
     capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
