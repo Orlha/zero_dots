@@ -3,6 +3,9 @@ eval "$(starship init zsh)"
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
 
+# CASE_SENSITIVE="true"
+# DISABLE_AUTO_TITLE="true"
+
 autoload -Uz compinit
 compinit
 zstyle ':completion:*' menu select
@@ -33,15 +36,15 @@ else
 fi
 
 antigen use oh-my-zsh
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-#antigen bundle sudo
-antigen bundle MichaelAquilina/zsh-you-should-use
+antigen bundle sudo
+#antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle colored-man-pages
 antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 antigen apply
 
-# unbind alt+l that zsh bind
+# unbind alt+l that zsh binds
 bindkey -r "^[l"
 
 bindkey  "^[[1~"   beginning-of-line
