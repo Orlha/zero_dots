@@ -718,7 +718,7 @@ require('fzf-lua').setup({
         row        = 0.5,
         col        = 0.5,
     },
-    file_ignore_patterns = { "build/", },
+    file_ignore_patterns = { ".cache", "build/", },
 })
 require('fzf-lua').register_ui_select({
     winopts = {
