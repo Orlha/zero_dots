@@ -80,7 +80,7 @@ disabled = false
 disabled = true
 
 [time]
-disabled = false
+disabled = true
 style = "bold blue"
 format = '[🕙 $time]($style) '
 time_format = '%H:%M:%S'
