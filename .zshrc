@@ -35,6 +35,10 @@ else
     source /usr/share/zsh/share/antigen.zsh
 fi
 
+zvm_after_init_commands+=(
+  'zvm_bindkey viins "^R" fzf-history-widget'
+)
+
 antigen use oh-my-zsh
 antigen bundle sudo
 #antigen bundle MichaelAquilina/zsh-you-should-use
@@ -42,6 +46,7 @@ antigen bundle colored-man-pages
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle jeffreytse/zsh-vi-mode
 antigen apply
 
 # unbind alt+l that zsh binds
