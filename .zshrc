@@ -36,7 +36,7 @@ else
 fi
 
 zvm_after_init_commands+=(
-  'zvm_bindkey viins "^R" fzf-history-widget'
+    'zvm_bindkey viins "^R" fzf-history-widget'
 )
 
 antigen use oh-my-zsh
