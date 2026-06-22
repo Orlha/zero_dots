@@ -368,8 +368,10 @@ EOF
 lua << EOF
 local virtual_text_config = {
     format = function(diagnostic)
-        return diagnostic.message:gsub("%(fix available%)", "")
-    end,
+    return diagnostic.message
+        :gsub("%(fix available%)", "")
+        :gsub("%(fixes available%)", "")
+    end
     prefix = "●",
 }
 vim.diagnostic.config({
