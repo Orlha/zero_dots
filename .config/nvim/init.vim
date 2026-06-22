@@ -335,6 +335,17 @@ vim.keymap.set('n', '<leader>h', function()
     vim.notify("> " .. (is_enabled and "Disabled" or "Enabled"), "info", { title = "Inlay Hints" })
 end, { desc = "toggle inlay hints" })
 
+vim.api.nvim_create_autocmd("InsertEnter", {
+    callback = function()
+        vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+    end
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+    callback = function()
+        vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+    end
+})
+
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
