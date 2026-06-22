@@ -371,7 +371,7 @@ local virtual_text_config = {
     return diagnostic.message
         :gsub("%(fix available%)", "")
         :gsub("%(fixes available%)", "")
-    end
+    end,
     prefix = "●",
 }
 vim.diagnostic.config({
