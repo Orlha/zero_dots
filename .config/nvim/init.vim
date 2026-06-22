@@ -318,9 +318,22 @@ vim.lsp.config('clangd', {
     flags = {
         debounce_text_changes = 1000,
     },
-    capabilities = require('blink.cmp').get_lsp_capabilities(),
+    capabilities = vim.tbl_deep_extend('force',
+        require('blink.cmp').get_lsp_capabilities(),
+        { textDocument = { inlayHint = { dynamicRegistration = true } } }
+    ),
 })
 vim.lsp.enable('clangd')
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+    end,
+})
+vim.keymap.set('n', '<leader>h', function()
+    local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+    vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = 0 })
+    vim.notify("> " .. (is_enabled and "Disabled" or "Enabled"), "info", { title = "Inlay Hints" })
+end, { desc = "toggle inlay hints" })
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
@@ -338,13 +351,13 @@ vim.keymap.set('n', '<leader>t', function()
             client.stop()
         end
         lsp_enabled = false
-        vim.notify("> Disabled", "info", { title = "LSP Toggle" })
+        vim.notify("> Disabled", "info", { title = "LSP" })
     else
         vim.lsp.enable('clangd')
         lsp_enabled = true
-        vim.notify("> Enabled", "info", { title = "LSP Toggle" })
+        vim.notify("> Enabled", "info", { title = "LSP" })
     end
-end, { desc = "Toggle LSP on/off" })
+end, { desc = "toggle LSP" })
 EOF
 
 
@@ -388,12 +401,12 @@ vim.keymap.set('n', '<leader>v', function()
             virtual_lines = { only_current_line = true },
         })
         ]]
-        vim.notify("> Enabled", "info", { title = "Virtual Text Toggle" })
+        vim.notify("> Enabled", "info", { title = "Virtual Text" })
     else
         vim.diagnostic.config({ virtual_text = false })
-        vim.notify("> Disabled", "info", { title = "Virtual Text Toggle" })
+        vim.notify("> Disabled", "info", { title = "Virtual Text" })
     end
-end, { desc = "Toggle virtual text" })
+end, { desc = "toggle virtual text" })
 EOF
 
 lua << EOF
