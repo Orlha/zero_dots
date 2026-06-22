@@ -7,7 +7,7 @@ Diagnostics:
     AnalyzeAngledIncludes: true
   ClangTidy:
     Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*]
-    Remove: [modernize-use-trailing-return-type, readability-identifier-length]
+    Remove: [modernize-use-trailing-return-type, readability-identifier-length, cppcoreguidelines-pro-type-reinterpret-cast]
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
       readability-identifier-naming.FunctionCase: lower_case
