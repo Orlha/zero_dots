@@ -329,20 +329,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
     end,
 })
+
+local hint_enabled = false
+
 vim.keymap.set('n', '<leader>h', function()
-    local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
-    vim.lsp.inlay_hint.enable(not is_enabled, { bufnr = 0 })
-    vim.notify("> " .. (is_enabled and "Disabled" or "Enabled"), "info", { title = "Inlay Hints" })
+    hint_enabled = not hint_enabled
+    vim.lsp.inlay_hint.enable(hint_enabled, { bufnr = 0 })
+    vim.notify("> " .. (hint_enabled and "Enabled" or "Disabled"), "info", { title = "Inlay Hints" })
 end, { desc = "toggle inlay hints" })
 
 vim.api.nvim_create_autocmd("InsertEnter", {
     callback = function()
-        vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+        if hint_enabled then
+            vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+        end
     end
 })
 vim.api.nvim_create_autocmd("InsertLeave", {
     callback = function()
-        vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+        if hint_enabled then
+            vim.lsp.inlay_hint.enable(true, { bufnr = 0 })
+        end
     end
 })
 
