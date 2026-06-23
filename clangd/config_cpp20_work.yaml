@@ -10,6 +10,13 @@ CompileFlags:
     -Wnull-dereference,
     -Wcast-align,
     -Wunused,
+    -Wdouble-promotion,
+    -Wduplicated-cond,
+    -Wduplicated-branches,
+    -Wlogical-op,
+    -Wuseless-cast,
+    -Wrestrict,
+    -Wold-style-cast,
     -Wformat=2,
     -I/opt/ros/humble/include,
     -I/opt/ros/humble/include/rcutils,
@@ -119,7 +126,7 @@ Diagnostics:
   Includes:
     AnalyzeAngledIncludes: true
   ClangTidy:
-    Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*]
+    Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*, misc-*]
     Remove: [modernize-use-trailing-return-type, readability-identifier-length, cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-pro-type-vararg, readability-uppercase-literal-suffix]
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
