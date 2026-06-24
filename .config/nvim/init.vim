@@ -85,6 +85,7 @@ require('bamboo').setup({
         --['@lsp.typemod.method.classScope'] = { link = '@function.method' },
         ['@lsp.typemod.method.readonly'] = { link = '@function.method' },
         ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.method' },
+        ['@lsp.type.concept'] = { link = 'Keyword' },
     },
 })
 require('bamboo').load()
