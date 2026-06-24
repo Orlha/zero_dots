@@ -133,5 +133,8 @@ Diagnostics:
       readability-identifier-naming.FunctionCase: lower_case
       readability-identifier-naming.ClassCase: CamelCase
       readability-function-cognitive-complexity.Threshold: '50'
+      readability-identifier-naming.ClassIgnoredRegexp: '.*(_t$|_type).*'
+      readability-identifier-naming.StructIgnoredRegexp: '.*(_t$|_type).*'
+
 InlayHints:
   TypeNameLimit: 0
