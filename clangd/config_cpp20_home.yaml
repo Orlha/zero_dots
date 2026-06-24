@@ -1,0 +1,41 @@
+CompileFlags:
+  Add: [
+    -std=c++20,
+    -Wall,
+    -Wextra,
+    -Wpedantic,
+    -Wshadow,
+    -Wconversion,
+    -Wsign-conversion,
+    -Wnull-dereference,
+    -Wcast-align,
+    -Wunused,
+    -Wdouble-promotion,
+    -Wduplicated-cond,
+    -Wduplicated-branches,
+    -Wlogical-op,
+    -Wuseless-cast,
+    -Wrestrict,
+    -Wold-style-cast,
+    -Wformat=2,
+    -Weverything,
+    -Wno-c++98-compat,
+  ]
+Diagnostics:
+  UnusedIncludes: Strict
+  MissingIncludes: Strict
+  Includes:
+    AnalyzeAngledIncludes: true
+  ClangTidy:
+    Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*, misc-*]
+    Remove: [modernize-use-trailing-return-type, readability-identifier-length, cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-pro-type-vararg, readability-uppercase-literal-suffix]
+    CheckOptions:
+      readability-identifier-naming.VariableCase: lower_case
+      readability-identifier-naming.FunctionCase: lower_case
+      readability-identifier-naming.ClassCase: CamelCase
+      readability-function-cognitive-complexity.Threshold: '50'
+      readability-identifier-naming.ClassIgnoredRegexp: '.*(_t$|_type).*'
+      readability-identifier-naming.StructIgnoredRegexp: '.*(_t$|_type).*'
+
+InlayHints:
+  TypeNameLimit: 0
