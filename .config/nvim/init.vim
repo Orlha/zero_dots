@@ -335,7 +335,8 @@ local hint_enabled = false
 
 vim.keymap.set('n', '<leader>h', function()
     hint_enabled = not hint_enabled
-    vim.lsp.inlay_hint.enable(hint_enabled, { bufnr = 0 })
+    --vim.lsp.inlay_hint.enable(hint_enabled, { bufnr = 0 })
+    vim.lsp.inlay_hint.enable(hint_enabled, { bufnr = nil })
     vim.notify("> " .. (hint_enabled and "Enabled" or "Disabled"), "info", { title = "Inlay Hints" })
 end, { desc = "toggle inlay hints" })
 
