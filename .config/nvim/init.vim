@@ -299,6 +299,13 @@ require('blink.cmp').setup({
     },
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+            lsp = {
+                name = 'lsp',
+                module = 'blink.cmp.sources.lsp',
+                async = true,
+            },
+        },
     },
 })
 EOF
