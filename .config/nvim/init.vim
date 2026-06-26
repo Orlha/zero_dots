@@ -317,7 +317,7 @@ vim.lsp.config('clangd', {
     },
     filetypes = { "c", "cpp" },
     flags = {
-        debounce_text_changes = 1000,
+        debounce_text_changes = 50,
     },
     capabilities = vim.tbl_deep_extend('force',
         require('blink.cmp').get_lsp_capabilities(),

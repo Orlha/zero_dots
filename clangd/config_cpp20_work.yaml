@@ -137,4 +137,4 @@ Diagnostics:
       readability-identifier-naming.StructIgnoredRegexp: '.*(_t$|_type).*'
 
 InlayHints:
-  TypeNameLimit: 0
+  TypeNameLimit: 32
