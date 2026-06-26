@@ -324,7 +324,7 @@ lua << EOF
 vim.lsp.config('clangd', {
     cmd = {
         "clangd",
-        "--background-index",
+        "--background-index=true",
         "--limit-results=50",
         "--completion-style=bundled",
         "--header-insertion=never",
