@@ -2,6 +2,7 @@ eval "$(starship init zsh)"
 
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
+export COLORTERM=truecolor
 
 # CASE_SENSITIVE="true"
 # DISABLE_AUTO_TITLE="true"
