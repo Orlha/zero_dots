@@ -266,15 +266,17 @@ require('blink.cmp').setup({
     fuzzy = { implementation = "lua" },
     signature = {
         trigger = {
-            enabled = false,
+            enabled = true,
         },
     },
     completion = {
         menu = {
-            auto_show = false,
+            auto_show = function(ctx)
+                return ctx.trigger.kind == 'manual'
+            end,
         },
         list = { selection = { preselect = false } },
-        documentation = { auto_show = false },
+        documentation = { auto_show = true },
     },
     keymap = {
         preset = 'default',
@@ -298,7 +300,15 @@ require('blink.cmp').setup({
         }
     },
     sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        --default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = function()
+            local lsp_clients = vim.lsp.get_clients({ bufnr = 0 })
+            if #lsp_clients > 0 then
+                return { 'lsp' }
+            else
+                return { 'path', 'snippets', 'buffer' }
+            end
+        end,
         providers = {
             lsp = {
                 name = 'lsp',
