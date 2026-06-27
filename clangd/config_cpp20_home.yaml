@@ -20,6 +20,7 @@ CompileFlags:
     -Wformat=2,
     -Weverything,
     -Wno-c++98-compat,
+    -Wno-c++20-extensions,
   ]
 Diagnostics:
   UnusedIncludes: Strict
