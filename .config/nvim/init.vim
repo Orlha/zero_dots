@@ -45,6 +45,7 @@ Plug 'itchyny/vim-gitbranch'
 "Plug 'stevearc/dressing.nvim'
 "Plug 'junegunn/seoul256.vim'
 Plug 'ribru17/bamboo.nvim'
+Plug 'folke/snacks.nvim'
 call plug#end()
 
 set termguicolors
@@ -89,8 +90,24 @@ require('bamboo').setup({
     },
 })
 require('bamboo').load()
+
 EOF
 
+
+lua << EOF
+require("snacks").setup({
+scroll = {
+        animate = {
+            duration = { step = 12, total = 150 },
+        },
+        animate_repeat = {
+            delay = 100,
+            duration = { step = 6, total = 75 },
+        },
+    },
+})
+require("snacks").scroll.enable()
+EOF
 
 if 0
 lua << EOF
@@ -165,6 +182,8 @@ lua << EOF
     vim.keymap.set('n', '<leader>w', ':w<CR>', { silent = true, desc = 'save' })
     vim.keymap.set('n', '<leader>q', ':bd<CR>', { silent = true, desc = 'close buffer' })
     vim.keymap.set('n', '<leader>Q', ':bd!<CR>', { silent = true, desc = 'force close buffer' })
+    vim.keymap.set("n", "<leader>c", function() require("snacks").bufdelete() end)
+    vim.keymap.set("n", "<leader>C", function() require("snacks").bufdelete({ force = true }) end)
     vim.keymap.set('n', '<leader>n', ':bn<CR>', { silent = true, desc = 'next buffer' })
     vim.keymap.set('n', '<leader>p', ':bp<CR>', { silent = true, desc = 'previous buffer' })
     vim.keymap.set('n', '<leader>s', ':noh<CR>', { silent = true, desc = 'clear search highlight' })
@@ -175,6 +194,12 @@ lua << EOF
     vim.keymap.set('n', '<leader>fg', ':FzfLua live_grep<CR>', { silent = true })  -- Grep
     vim.keymap.set('n', '<leader>fb', ':FzfLua buffers<CR>', { silent = true })    -- Buffers
     vim.keymap.set('n', '<leader>fr', ':FzfLua oldfiles<CR>', { silent = true })   -- Recent
+
+    vim.keymap.set('n', '<leader>b', ':FzfLua buffers<CR>', { silent = true })
+    -- fzf git
+    vim.keymap.set('n', '<leader>gc', ':FzfLua git_commits<CR>', { silent = true })
+    vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<CR>', { silent = true })
+    vim.keymap.set('n', '<leader>gb', ':FzfLua git_branches<CR>', { silent = true })
     -- spider word motion
     vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>")
     vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>")
@@ -215,7 +240,10 @@ lua << EOF
         vim.api.nvim_set_hl(0, group, opts)
     end
 
-    vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#ff7f00', fg = '#000000', bold = false })
+    --vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#ff7f00', fg = '#000000', bold = false })
+    --vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#2d4f3a', fg = '#d4c9b8', bold = false })
+    --vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#5c4a2e', fg = '#e6d5b8', bold = false })
+    vim.api.nvim_set_hl(0, 'SmartYank', { bg = '#2a4a4a', fg = '#d4c9b8', bold = false })
     vim.api.nvim_set_hl(0, 'Search', { bg = '#606060', fg = '#000000' })
     vim.api.nvim_set_hl(0, 'CurSearch', { bg = '#D0D0D0', fg = '#000000' })
     vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#D0D0D0', fg = '#000000' })
@@ -271,9 +299,12 @@ require('blink.cmp').setup({
     },
     completion = {
         menu = {
+            --[[
             auto_show = function(ctx)
                 return ctx.trigger.kind == 'manual'
             end,
+            ]]
+            auto_show = false,
         },
         list = { selection = { preselect = false } },
         documentation = { auto_show = true },
@@ -300,7 +331,8 @@ require('blink.cmp').setup({
         }
     },
     sources = {
-        --default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        --[[
         default = function()
             local lsp_clients = vim.lsp.get_clients({ bufnr = 0 })
             if #lsp_clients > 0 then
@@ -309,14 +341,12 @@ require('blink.cmp').setup({
                 return { 'path', 'snippets', 'buffer' }
             end
         end,
+        ]]
         providers = {
             lsp = {
                 name = 'lsp',
                 module = 'blink.cmp.sources.lsp',
                 async = true,
-                should_show = function(ctx)
-                    return ctx.trigger.kind == 'manual'
-                end,
             },
         },
     },
@@ -492,6 +522,7 @@ lua << EOF
 require("noice").setup({
     messages = {
         view_search = false,
+        enabled = true,
     },
     lsp = {
         signature = {
@@ -813,3 +844,8 @@ autocmd WinNew *
             \ if !empty(win.relative) |
             \     let w:airline_disable_statusline = 1 |
             \ endif
+
+
+lua << EOF
+--vim.opt.shortmess:append("A")
+EOF
