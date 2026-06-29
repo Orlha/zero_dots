@@ -98,11 +98,11 @@ lua << EOF
 require("snacks").setup({
 scroll = {
         animate = {
-            duration = { step = 12, total = 150 },
+            duration = { step = 12, total = 120 },
         },
         animate_repeat = {
             delay = 100,
-            duration = { step = 6, total = 75 },
+            duration = { step = 6, total = 60 },
         },
     },
 })
