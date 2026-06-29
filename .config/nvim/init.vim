@@ -314,6 +314,9 @@ require('blink.cmp').setup({
                 name = 'lsp',
                 module = 'blink.cmp.sources.lsp',
                 async = true,
+                should_show = function(ctx)
+                    return ctx.trigger.kind == 'manual'
+                end,
             },
         },
     },
