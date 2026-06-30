@@ -848,4 +848,5 @@ autocmd WinNew *
 
 lua << EOF
 --vim.opt.shortmess:append("A")
+vim.opt.matchpairs:append("<:>")
 EOF
