@@ -124,10 +124,19 @@ Diagnostics:
   UnusedIncludes: Strict
   MissingIncludes: Strict
   Includes:
-    AnalyzeAngledIncludes: true
+    AnalyzeAngledIncludes: false
   ClangTidy:
     Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*, misc-*]
-    Remove: [modernize-use-trailing-return-type, readability-identifier-length, cppcoreguidelines-pro-type-reinterpret-cast, cppcoreguidelines-pro-type-vararg, readability-uppercase-literal-suffix, cppcoreguidelines-avoid-const-or-ref-data-members, misc-non-private-member-variables-in-classes]
+    Remove: [
+      modernize-use-trailing-return-type,
+      cppcoreguidelines-pro-type-reinterpret-cast,
+      cppcoreguidelines-pro-type-vararg,
+      cppcoreguidelines-avoid-const-or-ref-data-members,
+      readability-uppercase-literal-suffix,
+      readability-braces-around-statements,
+      readability-identifier-length,
+      misc-non-private-member-variables-in-classes
+    ]
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
       readability-identifier-naming.FunctionCase: lower_case
