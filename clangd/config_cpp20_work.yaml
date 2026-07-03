@@ -145,7 +145,9 @@ Diagnostics:
       readability-identifier-naming.ClassIgnoredRegexp: '.*(_t$|_type).*'
       readability-identifier-naming.StructIgnoredRegexp: '.*(_t$|_type).*'
       readability-magic-numbers.IgnoredIntegerValues: '0;1;2;3;4;65535'
+      readability-magic-numbers.IgnorePowersOf2IntegerValues: true
       cppcoreguidelines-avoid-magic-numbers.IgnoredIntegerValues: '0;1;2;3;4;65535'
+      cppcoreguidelines-avoid-magic-numbers.IgnorePowersOf2IntegerValues: true
 
 InlayHints:
   TypeNameLimit: 32
