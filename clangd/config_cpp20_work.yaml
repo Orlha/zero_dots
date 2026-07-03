@@ -135,7 +135,8 @@ Diagnostics:
       readability-uppercase-literal-suffix,
       readability-braces-around-statements,
       readability-identifier-length,
-      misc-non-private-member-variables-in-classes
+      misc-non-private-member-variables-in-classes,
+      bugprone-easily-swappable-parameters
     ]
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
