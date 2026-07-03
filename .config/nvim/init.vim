@@ -807,8 +807,8 @@ require('fzf-lua').setup({
 })
 require('fzf-lua').register_ui_select({
     winopts = {
-        height = 0.5,
-        width = 0.55,
+        height = 0.65,
+        width = 0.75,
         row = 0.5,
         col = 0.5,
         preview = {
