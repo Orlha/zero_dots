@@ -144,7 +144,7 @@ Diagnostics:
       readability-function-cognitive-complexity.Threshold: '50'
       readability-identifier-naming.ClassIgnoredRegexp: '.*(_t$|_type).*'
       readability-identifier-naming.StructIgnoredRegexp: '.*(_t$|_type).*'
-      readability-magic-numbers.IgnoredIntegerValues: '0xFFFF'
+      readability-magic-numbers.IgnoredIntegerValues: '0;1;2;3;4;0xFFFF'
 
 InlayHints:
   TypeNameLimit: 32
