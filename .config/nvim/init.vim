@@ -56,7 +56,8 @@ lua << EOF
 require('bamboo').setup({
     transparent = true,
     colors = {
-        cyan = '#a7cdcd',
+        --cyan = '#a7cdcd',
+        cyan = '#8ae0e0',
         light_blue = '#56c7ef',
     },
     code_style = {
