@@ -132,6 +132,7 @@ Diagnostics:
       cppcoreguidelines-pro-type-reinterpret-cast,
       cppcoreguidelines-pro-type-vararg,
       cppcoreguidelines-avoid-const-or-ref-data-members,
+      cppcoreguidelines-pro-bounds-pointer-arithmetic,
       readability-uppercase-literal-suffix,
       readability-braces-around-statements,
       readability-identifier-length,
