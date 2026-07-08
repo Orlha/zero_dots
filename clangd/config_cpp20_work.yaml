@@ -119,6 +119,7 @@ CompileFlags:
     -isystem/opt/ros/humble/include/urdf_parser_plugin,
     -isystem/opt/ros/humble/include/vision_msgs,
     -isystem/opt/ros/humble/include/visualization_msgs,
+    -isystem/usr/include/opencv4,
   ]
 Diagnostics:
   UnusedIncludes: Strict
