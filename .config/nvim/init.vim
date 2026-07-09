@@ -412,6 +412,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+vim.keymap.set('n', '<leader>o', vim.lsp.buf.definition, { desc = "LSP Go to File" })
 EOF
 
 
