@@ -57,7 +57,9 @@ require('bamboo').setup({
     transparent = true,
     colors = {
         --cyan = '#a7cdcd',
-        cyan = '#8ae0e0',
+        --cyan = '#8ae0e0',
+        --cyan = '#b0e8e8',
+        cyan = '#a0e0e0',
         light_blue = '#56c7ef',
     },
     code_style = {

@@ -93,6 +93,9 @@ bindkey -s "^[[21~" ""
 bindkey -s "^[[23~" ""
 bindkey -s "^[[24~" ""
 
+bindkey -s "^[[25~" "\e["
+bindkey -s "^[[26~" "\e]"
+
 source <(fzf --zsh)
 
 return
