@@ -40,7 +40,8 @@ Diagnostics:
       readability-braces-around-statements,
       readability-identifier-length,
       misc-non-private-member-variables-in-classes,
-      bugprone-easily-swappable-parameters
+      bugprone-easily-swappable-parameters,
+      performance-move-const-arg
     ]
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
