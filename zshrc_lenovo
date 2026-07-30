@@ -1,0 +1,137 @@
+HISTFILE="$HOME/.cache/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+
+if [ "$TERM" = "linux" ]; then
+    PS1='%n@%m:%~$ '
+    return 0
+fi
+
+export ZSH_COMPDUMP="$HOME/.cache/zcompdump"
+#setopt PROMPT_SUBST
+PROMPT='%F{141}%~ %F{117}❯%f '
+
+#DISABLE_AUTO_TITLE="true"
+#unsetopt prompt_subst
+#print -n "\033]2;kitty\033\\"
+
+export XCURSOR_THEME=breeze_cursors
+export XCURSOR_SIZE=24
+export COLORTERM=truecolor
+
+# CASE_SENSITIVE="true"
+# DISABLE_AUTO_TITLE="true"
+
+autoload -Uz compinit
+compinit -d "$ZSH_COMPDUMP"
+zstyle ':completion:*' menu select
+
+alias ls='ls --color=auto'
+alias ip='ip -c=auto'
+alias poweroff='poweroff --no-wall'
+alias reboot='reboot --no-wall'
+alias nnn='nnn -e'
+
+export EDITOR=nvim
+export PATH=$HOME/.local/bin:$PATH
+
+set -o emacs
+tabs 4
+
+eval "$(zoxide init zsh)"
+
+distro=$(grep ^ID= /etc/os-release)
+if [[ $distro == "ID=ubuntu" ]]; then
+    source /usr/share/zsh-antigen/antigen.zsh
+else
+    source /usr/share/zsh/share/antigen.zsh
+fi
+
+zvm_after_init_commands+=(
+    #'zvm_bindkey viins "^R" fzf-history-widget'
+)
+
+antigen use oh-my-zsh
+antigen bundle sudo
+antigen bundle colored-man-pages
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+#antigen bundle jeffreytse/zsh-vi-mode
+antigen apply
+
+# unbind alt+l that zsh binds
+bindkey -r "^[l"
+
+bindkey  "^[[1~"   beginning-of-line
+bindkey  "^[[4~"   end-of-line
+bindkey "^[[3~" delete-char
+bindkey "^[[2~" overwrite-mode
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey "^[[5~" history-search-backward
+bindkey "^[[6~" history-search-forward
+bindkey '^k' up-line-or-history
+bindkey '^j' down-line-or-history
+
+bindkey -r "^[OP"
+bindkey -r "^[OQ"
+bindkey -r "^[OR"
+bindkey -r "^[OS"
+bindkey -r "^[[15~"
+bindkey -r "^[[17~"
+bindkey -r "^[[18~"
+bindkey -r "^[[19~"
+bindkey -r "^[[20~"
+bindkey -r "^[[21~"
+bindkey -r "^[[23~"
+bindkey -r "^[[24~"
+
+bindkey -s "^[OP" ""
+bindkey -s "^[OQ" ""
+bindkey -s "^[OR" ""
+bindkey -s "^[OS" ""
+bindkey -s "^[[15~" ""
+bindkey -s "^[[17~" ""
+bindkey -s "^[[18~" ""
+bindkey -s "^[[19~" ""
+bindkey -s "^[[20~" ""
+bindkey -s "^[[21~" ""
+bindkey -s "^[[23~" ""
+bindkey -s "^[[24~" ""
+
+bindkey -s "^[[25~" "\e["
+bindkey -s "^[[26~" "\e]"
+
+source <(fzf --zsh)
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=244'
+return
+
+# Keypad
+# 0 . Enter
+bindkey -s "^[Op" "0"
+bindkey -s "^[On" "."
+bindkey -s "^[OM" "^M"
+# 1 2 3
+bindkey -s "^[Oq" "1"
+bindkey -s "^[Or" "2"
+bindkey -s "^[Os" "3"
+# 4 5 6
+bindkey -s "^[Ot" "4"
+bindkey -s "^[Ou" "5"
+bindkey -s "^[Ov" "6"
+# 7 8 9
+bindkey -s "^[Ow" "7"
+bindkey -s "^[Ox" "8"
+bindkey -s "^[Oy" "9"
+# + -  * /
+bindkey -s "^[Ok" "+"
+bindkey -s "^[Om" "-"
+bindkey -s "^[Oj" "*"
+bindkey -s "^[Oo" "/"
