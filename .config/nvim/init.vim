@@ -98,6 +98,8 @@ EOF
 
 
 lua << EOF
+-- too laggy on complex files
+--[[
 require("snacks").setup({
 scroll = {
         animate = {
@@ -110,6 +112,7 @@ scroll = {
     },
 })
 require("snacks").scroll.enable()
+]]
 EOF
 
 if 0

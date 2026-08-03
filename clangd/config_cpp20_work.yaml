@@ -138,6 +138,7 @@ Diagnostics:
       readability-uppercase-literal-suffix,
       readability-braces-around-statements,
       readability-identifier-length,
+      readability-math-missing-parentheses,
       misc-non-private-member-variables-in-classes,
       bugprone-easily-swappable-parameters,
       performance-move-const-arg
