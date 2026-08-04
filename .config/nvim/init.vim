@@ -102,10 +102,24 @@ require("no-neck-pain").setup({
     width = dynamic_width,
 
     buffers = {
+        left = {
+            scratchPad = {
+                enabled = true,
+                pathToFile = "~/notes/left.md",
+            },
+        },
+        right = {
+            scratchPad = {
+                enabled = true,
+                pathToFile = "~/notes/right.md",
+            },
+        },
+        --[[
         scratchPad = {
             enabled = true,
             location = "~/notes/",
         },
+        ]]
         bo = { filetype = "md" },
         wo = {
             fillchars = "eob: ",
