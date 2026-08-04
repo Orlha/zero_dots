@@ -100,8 +100,18 @@ local screen_width = vim.o.columns
 local dynamic_width = math.floor(screen_width * 0.55)
 require("no-neck-pain").setup({
     width = dynamic_width,
-})
 
+    buffers = {
+        scratchPad = {
+            enabled = true,
+            location = "~/notes/no-neck-pain/",
+        },
+        bo = { filetype = "md" },
+        wo = {
+            fillchars = "eob: ",
+        },
+    },
+})
 EOF
 
 
