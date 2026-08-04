@@ -104,7 +104,7 @@ require("no-neck-pain").setup({
     buffers = {
         scratchPad = {
             enabled = true,
-            location = "~/notes/no-neck-pain/",
+            location = "~/notes/",
         },
         bo = { filetype = "md" },
         wo = {
