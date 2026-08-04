@@ -46,6 +46,7 @@ Plug 'itchyny/vim-gitbranch'
 "Plug 'junegunn/seoul256.vim'
 Plug 'ribru17/bamboo.nvim'
 Plug 'folke/snacks.nvim'
+Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 call plug#end()
 
 set termguicolors
@@ -93,6 +94,13 @@ require('bamboo').setup({
     },
 })
 require('bamboo').load()
+
+
+local screen_width = vim.o.columns
+local dynamic_width = math.floor(screen_width * 0.55)
+require("no-neck-pain").setup({
+    width = dynamic_width,
+})
 
 EOF
 
@@ -296,6 +304,9 @@ hi NvimTreeNormal   guibg=NONE ctermbg=NONE
 hi NvimTreeNormalNC guibg=NONE ctermbg=NONE
 
 lua << EOF
+vim.keymap.set('n', '<F3>', ':NoNeckPain<CR>', { silent = true, desc = 'Toggle Center Mode' })
+vim.keymap.set('i', '<F3>', '<Esc>:NoNeckPain<CR>a', { silent = true, desc = 'Toggle Center Mode' })
+
 require('blink.cmp').setup({
     fuzzy = { implementation = "lua" },
     signature = {
