@@ -36,6 +36,7 @@ Diagnostics:
       cppcoreguidelines-avoid-const-or-ref-data-members,
       cppcoreguidelines-pro-bounds-pointer-arithmetic,
       cppcoreguidelines-avoid-c-arrays,
+      cppcoreguidelines-pro-bounds-constant-array-index,
       readability-uppercase-literal-suffix,
       readability-braces-around-statements,
       readability-identifier-length,
