@@ -98,6 +98,8 @@ bindkey -s "^[[26~" "\e]"
 
 source <(fzf --zsh)
 
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=244'
 return
 
 # Keypad
