@@ -97,7 +97,7 @@ require('bamboo').load()
 
 
 local screen_width = vim.o.columns
-local dynamic_width = math.floor(screen_width * 0.55)
+local dynamic_width = math.floor(screen_width * 0.65)
 require("no-neck-pain").setup({
     width = dynamic_width,
 
