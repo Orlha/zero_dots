@@ -289,6 +289,10 @@ lua << EOF
         require("noice").redirect("Inspect")
     end, { desc = "Redirect :Inspect to Popup" })
 
+    vim.keymap.set('n', '<leader>nn', '<cmd>Noice last<CR>', { desc = "Noice last notification" })
+    vim.keymap.set('n', '<leader>nh', '<cmd>Noice history<CR>', { desc = "Noice history" })
+    vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<CR>', { desc = "Noice dismiss all" })
+
     require("nvim-autopairs").setup {}
 
     vim.g.airline_mode_map = {
