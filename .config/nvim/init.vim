@@ -47,11 +47,33 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'ribru17/bamboo.nvim'
 Plug 'folke/snacks.nvim'
 Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
 call plug#end()
 
 set termguicolors
 set background=dark
 
+lua << EOF
+local languages = { "c", "cpp" }
+require('nvim-treesitter').install(languages)
+
+vim.filetype.add({
+  extension = {
+    inl = "cpp",
+    -- Add any other custom extensions here
+  },
+})
+
+local ts_enabled_filetypes = { "c", "cpp" }
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    if vim.tbl_contains(ts_enabled_filetypes, vim.bo.filetype) then
+      pcall(vim.treesitter.start)
+    end
+  end,
+})
+EOF
 
 lua << EOF
 require('bamboo').setup({
