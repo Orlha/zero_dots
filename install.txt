@@ -35,3 +35,7 @@ ubuntu: install from git
 install starship
 arch: starship
 ubuntu: curl -sS https://starship.rs/install.sh | sh
+
+install tree-sitter-cli
+arch: tree-sitter-cli
+ubuntu 22: binary release from github
