@@ -1,5 +1,4 @@
-"syntax enable
-syntax off
+syntax enable
 filetype plugin indent on
 set list
 set listchars=tab:▸·,trail:~
