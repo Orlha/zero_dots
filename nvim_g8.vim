@@ -49,10 +49,40 @@ Plug 'ribru17/bamboo.nvim'
 Plug 'folke/snacks.nvim'
 Plug 'shortcuts/no-neck-pain.nvim', { 'tag': '*' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'branch': 'main', 'do': ':TSUpdate' }
+"Plug 'VonHeikemen/fine-cmdline.nvim'
 call plug#end()
 
 set termguicolors
 set background=dark
+
+lua << EOF
+--[[
+vim.opt.cmdheight = 0
+require('fine-cmdline').setup({
+  cmdline = {
+    enable_keymaps = true,
+    smart_history = true,
+  },
+  popup = {
+    position = {
+      row = '30%',
+      col = '50%',
+    },
+    size = {
+      width = '60%',
+    },
+    border = {
+      style = 'rounded',
+    },
+  },
+})
+
+-- Intercept mappings to send them to the floating box UI
+vim.keymap.set('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
+vim.keymap.set('n', '/', '<cmd>FineCmdline /<CR>', { noremap = true })
+vim.keymap.set('n', '?', '<cmd>FineCmdline ?<CR>', { noremap = true })
+]]
+EOF
 
 lua << EOF
 local languages = { "c", "cpp" }
@@ -71,6 +101,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     if vim.tbl_contains(ts_enabled_filetypes, vim.bo.filetype) then
       pcall(vim.treesitter.start)
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end,
 })
@@ -80,6 +111,20 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     pcall(vim.treesitter.start)  -- Manually turn on highlighting
   end,
+})
+]]
+EOF
+
+lua << EOF
+--[[
+require("snacks").setup({
+  notifier = {
+    enabled = true,
+    timeout = 3000,
+    -- CORRECT FORMAT: width must be a table containing min and max rules
+    width = { min = 40, max = 0.4 }, 
+    height = { min = 1, max = 0.6 },
+  },
 })
 ]]
 EOF
@@ -130,6 +175,18 @@ require('bamboo').load()
 
 local fg = vim.api.nvim_get_hl(0, { name = "StorageClass" }).fg
 vim.api.nvim_set_hl(0, "StorageClass", { fg = fg, italic = false })
+
+local function remove_italics(group)
+    local hl = vim.api.nvim_get_hl(0, { name = group })
+    if hl and hl.italic then
+        hl.italic = false
+        vim.api.nvim_set_hl(0, group, hl)
+    end
+end
+
+remove_italics('@keyword')
+remove_italics('@keyword.storage')
+remove_italics('@keyword.modifier')
 
 local screen_width = vim.o.columns
 local dynamic_width = math.floor(screen_width * 0.65)
@@ -259,6 +316,8 @@ lua << EOF
     vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "NONE" })
     vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "NONE" })
     vim.g.mapleader = ' '
+    --vim.keymap.set("n", "<leader>nh", function() require("snacks").notifier.show_history() end, { desc = "Notification History" })
+    --vim.keymap.set("n", "<leader>nc", function() require("snacks").notifier.hide() end, { desc = "Clear Notifications" })
     vim.opt.termguicolors = true
     vim.opt.splitright = true
     vim.opt.splitbelow = true
@@ -290,6 +349,11 @@ lua << EOF
     vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>")
     vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>")
     vim.opt.shortmess:append("I")
+
+    -- inspect
+    vim.keymap.set("n", "<leader>i", function()
+        require("noice").redirect("Inspect")
+    end, { desc = "Redirect :Inspect to Popup" })
 
     require("nvim-autopairs").setup {}
 

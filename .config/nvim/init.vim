@@ -70,6 +70,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     if vim.tbl_contains(ts_enabled_filetypes, vim.bo.filetype) then
       pcall(vim.treesitter.start)
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end,
 })
@@ -121,6 +122,18 @@ require('bamboo').load()
 
 local fg = vim.api.nvim_get_hl(0, { name = "StorageClass" }).fg
 vim.api.nvim_set_hl(0, "StorageClass", { fg = fg, italic = false })
+
+local function remove_italics(group)
+    local hl = vim.api.nvim_get_hl(0, { name = group })
+    if hl and hl.italic then
+        hl.italic = false
+        vim.api.nvim_set_hl(0, group, hl)
+    end
+end
+
+remove_italics('@keyword')
+remove_italics('@keyword.storage')
+remove_italics('@keyword.modifier')
 
 local screen_width = vim.o.columns
 local dynamic_width = math.floor(screen_width * 0.65)
@@ -270,6 +283,11 @@ lua << EOF
     vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>")
     vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>")
     vim.opt.shortmess:append("I")
+
+    -- inspect
+    vim.keymap.set("n", "<leader>i", function()
+        require("noice").redirect("Inspect")
+    end, { desc = "Redirect :Inspect to Popup" })
 
     require("nvim-autopairs").setup {}
 
@@ -589,6 +607,7 @@ EOF
 
 "lua require("noice").setup()
 lua << EOF
+--[[
 require("noice").setup({
     messages = {
         view_search = false,
@@ -603,6 +622,7 @@ require("noice").setup({
         }
     },
 })
+]]
 EOF
 
 
