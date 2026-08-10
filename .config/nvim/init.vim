@@ -607,7 +607,6 @@ EOF
 
 "lua require("noice").setup()
 lua << EOF
---[[
 require("noice").setup({
     messages = {
         view_search = false,
@@ -622,7 +621,6 @@ require("noice").setup({
         }
     },
 })
-]]
 EOF
 
 
