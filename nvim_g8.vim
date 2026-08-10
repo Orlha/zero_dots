@@ -98,6 +98,9 @@ require('bamboo').setup({
 })
 require('bamboo').load()
 
+local fg = vim.api.nvim_get_hl(0, { name = "StorageClass" }).fg
+vim.api.nvim_set_hl(0, "StorageClass", { fg = fg, italic = false })
+
 local screen_width = vim.o.columns
 local dynamic_width = math.floor(screen_width * 0.65)
 require("no-neck-pain").setup({
