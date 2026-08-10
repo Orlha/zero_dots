@@ -63,16 +63,15 @@ require('bamboo').setup({
         cyan = '#a0e0e0',
         light_blue = '#56c7ef',
     },
-    --[[
     code_style = {
         comments = { italic = false },
         conditionals = { italic = false },
-        keywords = {},
-        functions = {},
+        keywords = { italic = false },
+        functions = { italic = false },
         namespaces = { italic = false },
         parameters = { italic = false },
-        strings = {},
-        variables = {},
+        strings = { italic = false },
+        variables = { italic = false },
     },
     ]]
         --[[
