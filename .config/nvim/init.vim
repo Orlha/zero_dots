@@ -73,7 +73,6 @@ require('bamboo').setup({
         strings = { italic = false },
         variables = { italic = false },
     },
-    ]]
         --[[
         ['@lsp.mod.readonly'] = { link = 'NONE' },
         ['@lsp.mod.classScope'] = { link = 'NONE' },
