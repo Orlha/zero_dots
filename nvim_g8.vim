@@ -64,6 +64,7 @@ require('bamboo').setup({
         cyan = '#a0e0e0',
         light_blue = '#56c7ef',
     },
+    --[[
     code_style = {
         comments = { italic = false },
         conditionals = { italic = false },
@@ -74,6 +75,7 @@ require('bamboo').setup({
         strings = {},
         variables = {},
     },
+    ]]
         --[[
         ['@lsp.mod.readonly'] = { link = 'NONE' },
         ['@lsp.mod.classScope'] = { link = 'NONE' },
@@ -91,6 +93,7 @@ require('bamboo').setup({
         --['@lsp.typemod.method.classScope'] = { link = '@function.method' },
         ['@lsp.typemod.method.readonly'] = { link = '@function.method' },
         ['@lsp.typemod.method.defaultLibrary'] = { link = '@function.method' },
+        ['@lsp.typemod.variable.readonly'] = { link = '@lsp.mod.readonly' },
         ['@lsp.type.concept'] = { link = 'Keyword' },
     },
 })
