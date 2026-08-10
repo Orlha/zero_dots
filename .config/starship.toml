@@ -31,6 +31,12 @@ disabled = true
 [git_commit]
 disabled = true
 
+[swift]
+disabled = true
+
+[zig]
+disabled = true
+
 [c]
 disabled = true
 
