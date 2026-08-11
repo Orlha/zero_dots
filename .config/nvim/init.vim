@@ -389,7 +389,7 @@ require('blink.cmp').setup({
         menu = {
             border = 'rounded',
             max_height = 16,
-            min_width = 20,
+            min_width = 16,
             --[[
             auto_show = function(ctx)
                 return ctx.trigger.kind == 'manual'

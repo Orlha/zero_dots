@@ -447,12 +447,14 @@ vim.keymap.set('i', '<F3>', '<Esc>:NoNeckPain<CR>a', { silent = true, desc = 'To
 require('blink.cmp').setup({
     fuzzy = { implementation = "lua" },
     signature = {
-        trigger = {
-            enabled = true,
-        },
+        enabled = true,
+        window = { border = 'rounded' }
     },
     completion = {
         menu = {
+            border = 'rounded',
+            max_height = 16,
+            min_width = 16,
             --[[
             auto_show = function(ctx)
                 return ctx.trigger.kind == 'manual'
