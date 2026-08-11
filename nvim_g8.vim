@@ -463,7 +463,12 @@ require('blink.cmp').setup({
             auto_show = false,
         },
         list = { selection = { preselect = false } },
-        documentation = { auto_show = true },
+        documentation = {
+            auto_show = true,
+            window = {
+                border = 'rounded'
+            }
+        },
     },
     keymap = {
         preset = 'default',
