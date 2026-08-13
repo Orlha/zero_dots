@@ -359,6 +359,10 @@ lua << EOF
     vim.keymap.set('n', '<leader>mh', '<cmd>Noice history<CR>', { desc = "Noice history" })
     vim.keymap.set('n', '<leader>md', '<cmd>Noice dismiss<CR>', { desc = "Noice dismiss all" })
 
+    vim.keymap.set('n', '<leader>p', function()
+        require('fzf-lua').lsp_definitions({ jump_to_single_result = false, winopts = { layout = 'vertical', preview = { layout = 'vertical' } } })
+    end, { desc = 'LSP: Definition Code Preview' })
+
     require("nvim-autopairs").setup {}
 
     vim.g.airline_mode_map = {
@@ -460,8 +464,10 @@ require('blink.cmp').setup({
                 return ctx.trigger.kind == 'manual'
             end,
             ]]
-            auto_show = false,
+            --auto_show = false,
+            auto_show = true,
         },
+        ghost_text = { enabled = true },
         list = { selection = { preselect = false } },
         documentation = {
             auto_show = true,
@@ -489,8 +495,10 @@ require('blink.cmp').setup({
         },
         completion = {
             list = { selection = { preselect = false } },
-            menu = { auto_show = false },
-            ghost_text = { enabled = false },
+            --menu = { auto_show = false },
+            menu = { auto_show = true },
+            --ghost_text = { enabled = false },
+            ghost_text = { enabled = true },
         }
     },
     sources = {
