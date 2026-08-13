@@ -293,7 +293,7 @@ lua << EOF
     vim.keymap.set('n', '<leader>mh', '<cmd>Noice history<CR>', { desc = "Noice history" })
     vim.keymap.set('n', '<leader>md', '<cmd>Noice dismiss<CR>', { desc = "Noice dismiss all" })
 
-    vim.keymap.set('n', '<leader>p', function()
+    vim.keymap.set('n', '<leader>k', function()
         require('fzf-lua').lsp_definitions({ jump_to_single_result = false, winopts = { layout = 'vertical', preview = { layout = 'vertical' } } })
     end, { desc = 'LSP: Definition Code Preview' })
 
@@ -400,7 +400,11 @@ require('blink.cmp').setup({
             end,
             ]]
             --auto_show = false,
-            auto_show = true,
+            --auto_show = true,
+            auto_show = function(ctx)
+                return ctx.trigger.kind == 'trigger_character'
+            end,
+            auto_show_delay_ms = 300,
         },
         ghost_text = { enabled = true },
         list = { selection = { preselect = false } },
