@@ -359,6 +359,18 @@ lua << EOF
     vim.keymap.set('n', '<leader>mh', '<cmd>Noice history<CR>', { desc = "Noice history" })
     vim.keymap.set('n', '<leader>md', '<cmd>Noice dismiss<CR>', { desc = "Noice dismiss all" })
 
+    vim.keymap.set('n', '<leader>j', function()
+        local params = vim.lsp.util.make_position_params(0, "utf-16")
+        vim.lsp.buf_request(0, 'textDocument/definition', params, function(_, result)
+            if not result or vim.tbl_isempty(result) then return end
+            local res = vim.islist(result) and result[1] or result
+            local bufnr = vim.uri_to_bufnr(res.uri or res.targetUri)
+            vim.fn.bufload(bufnr)
+            local range = res.range or res.targetSelectionRange
+            vim.lsp.util.open_floating_preview(vim.api.nvim_buf_get_lines(bufnr, range.start.line, range['end'].line + 15, false), vim.bo[bufnr].filetype, { border = "rounded", max_width = 80, max_height = 15 })
+        end)
+    end, { desc = 'LSP: Short Peek Definition' })
+
     vim.keymap.set('n', '<leader>k', function()
         require('fzf-lua').lsp_definitions({ jump_to_single_result = false, winopts = { layout = 'vertical', preview = { layout = 'vertical' } } })
     end, { desc = 'LSP: Definition Code Preview' })
