@@ -130,6 +130,7 @@ require("snacks").setup({
 EOF
 
 lua << EOF
+vim.keymap.set('i', '<C-Space>', function() end, { noremap = true, silent = true })
 require('bamboo').setup({
     transparent = true,
     colors = {
