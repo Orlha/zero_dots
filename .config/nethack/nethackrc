@@ -1,0 +1,28 @@
+OPTIONS=altmeta
+NAME=player
+OPTIONS=windowtype:curses
+OPTIONS=perm_invent
+OPTIONS=hitpointbar
+OPTIONS=menucolors
+MENUCOLOR=" blessed "=green
+MENUCOLOR=" cursed "=red
+MENUCOLOR=" uncursed "=yellow
+OPTIONS=windowborders:1
+
+MENUCOLOR=" \(being worn\)"=cyan
+MENUCOLOR=" \(weapon in "=brightcyan
+MENUCOLOR=" cursed .* \(being worn\)"=red
+#MENUCOLOR=" cursed .* \(being worn\)"=red&underline
+
+MENUCOLOR="loadstone"=orange&bold
+
+MENUCOLOR="Amulet of Yendor"=magenta&bold
+MENUCOLOR="The Bell of Opening"=magenta
+MENUCOLOR="The Book of the Dead"=magenta
+
+MENUCOLOR="bag of holding"=brightgreen
+MENUCOLOR="wand of death"=brightred
+MENUCOLOR="scroll of scare monster"=yellow
+
+# Underline and color-code all major inventory category headings
+#OPTIONS=menu_headings:underline
