@@ -37,10 +37,12 @@ Diagnostics:
       cppcoreguidelines-pro-bounds-pointer-arithmetic,
       cppcoreguidelines-avoid-c-arrays,
       cppcoreguidelines-pro-bounds-constant-array-index,
+      cppcoreguidelines-avoid-magic-numbers,
       readability-uppercase-literal-suffix,
       readability-braces-around-statements,
       readability-identifier-length,
       readability-math-missing-parentheses,
+      readability-magic-numbers,
       misc-non-private-member-variables-in-classes,
       bugprone-easily-swappable-parameters,
       performance-move-const-arg
