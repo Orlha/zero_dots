@@ -2,7 +2,8 @@ OPTIONS=altmeta
 NAME=player
 OPTIONS=windowtype:curses
 OPTIONS=perm_invent
-OPTIONS=hitpointbar
+#OPTIONS=hitpointbar
+OPTIONS=color,statushilites,hitpointbar
 OPTIONS=menucolors
 MENUCOLOR=" blessed "=green
 MENUCOLOR=" cursed "=red
@@ -26,3 +27,20 @@ MENUCOLOR="scroll of scare monster"=yellow
 
 # Underline and color-code all major inventory category headings
 #OPTIONS=menu_headings:underline
+
+OPTIONS=hilite_status: hitpoints/100%/green
+OPTIONS=hilite_status: hitpoints/<100%/green
+OPTIONS=hilite_status: hitpoints/<66%/yellow
+OPTIONS=hilite_status: hitpoints/<33%/red&bold
+
+OPTIONS=showexp
+OPTIONS=time
+
+#OPTIONS=hilite_pet
+#OPTIONS=hilite_pile
+
+# Hunger colors (Green when full, Orange when hungry, Red/Blinking when dying)
+OPTIONS=hilite_status: hunger/satiated/green/hungry/yellow/weak/orange/fainting/red&bold/fainted/red&inverse
+# Encumbrance/Weight colors
+OPTIONS=hilite_status: cap/burdened/yellow/stressed/orange/strained/red/overtaxed/red&bold/overloaded/red&inverse
+OPTIONS=!tutorial
