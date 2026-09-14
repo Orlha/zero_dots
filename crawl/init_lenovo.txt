@@ -1,0 +1,15 @@
+# Global UI scale (Great for 4K or high-res monitors. Try 2 or 3)
+game_scale = 1
+
+# Increase the size of the game map grid and sidebar icons
+tile_cell_pixels = 56
+#tile_sidebar_pixels = 32
+tile_sidebar_pixels = 40
+
+# Increase text and font sizes
+tile_font_crt_size = 24
+tile_font_stat_size = 24
+tile_font_msg_size = 24
+
+#tile_full_screen = true
+#tile_layout_priority = minimap, inventory, monsters, messages
