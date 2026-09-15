@@ -31,6 +31,7 @@ Diagnostics:
     Add: [bugprone-*, performance-*, readability-*, modernize-*, cppcoreguidelines-*, misc-*]
     Remove: [
       modernize-use-trailing-return-type,
+      modernize-use-designated-initializers,
       cppcoreguidelines-pro-type-reinterpret-cast,
       cppcoreguidelines-pro-type-vararg,
       cppcoreguidelines-avoid-const-or-ref-data-members,
