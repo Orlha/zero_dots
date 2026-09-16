@@ -10,6 +10,11 @@ tile_sidebar_pixels = 40
 tile_font_crt_size = 24
 tile_font_stat_size = 24
 tile_font_msg_size = 24
+tile_font_lbl_size = 24
+
+tile_map_pixels = 4
+tile_filter_scaling = false
+default_manual_training = true
 
 #tile_full_screen = true
 #tile_layout_priority = minimap, inventory, monsters, messages
