@@ -198,13 +198,13 @@ require("no-neck-pain").setup({
         left = {
             scratchPad = {
                 enabled = true,
-                pathToFile = "~/notes/left.md",
+                pathToFile = "~/notes/scratch/no-neck-pain-left.md",
             },
         },
         right = {
             scratchPad = {
                 enabled = true,
-                pathToFile = "~/notes/right.md",
+                pathToFile = "~/notes/scratch/no-neck-pain-right.md",
             },
         },
         bo = { filetype = "md" },
