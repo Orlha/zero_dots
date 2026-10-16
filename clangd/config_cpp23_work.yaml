@@ -19,6 +19,7 @@ CompileFlags:
     -Wold-style-cast,
     -Wformat=2,
     -Wno-pre-c++20-compat-pedantic,
+    -Wno-c++98-compat-pedantic,
     -I/opt/ros/humble/include,
     -I/opt/ros/humble/include/rcutils,
     -isystem/opt/ros/humble/include/action_msgs,
