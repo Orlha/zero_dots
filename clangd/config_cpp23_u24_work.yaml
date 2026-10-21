@@ -120,6 +120,7 @@ CompileFlags:
     -isystem/opt/ros/jazzy/include/vision_msgs,
     -isystem/opt/ros/jazzy/include/visualization_msgs,
     -isystem/usr/include/opencv4,
+    -isystem/usr/local/include/iceoryx2/v0.9.3,
   ]
 Diagnostics:
   UnusedIncludes: Strict
