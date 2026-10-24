@@ -1,4 +1,17 @@
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+
+if [ "$TERM" = "linux" ]; then
+    PS1='%n@%m:%~$ '
+    return 0
+fi
+
+PROMPT='%F{141}%~ %F{117}❯%f '
 
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
