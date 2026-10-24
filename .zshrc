@@ -11,7 +11,38 @@ if [ "$TERM" = "linux" ]; then
     return 0
 fi
 
-PROMPT='%F{141}%~ %F{117}❯%f '
+#######################
+
+setopt PROMPT_SUBST
+
+autoload -Uz vcs_info
+precmd() {
+    vcs_info
+    if [[ -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
+        # Over SSH: User, "in", Globe, Host
+        ssh_block='%F{#a3e635}%n%f %F{#f8f8f2}in%f %F{#a3e635}🌍 %m%f '
+    else
+        # Local: Just User
+        ssh_block='%F{#a3e635}%n%f '
+    fi
+}
+
+# RPROMPT: Orange Seedling & Branch
+zstyle ':vcs_info:git:*' formats ' %F{#ff8c00}🌱 %b%f'
+zstyle ':vcs_info:git:*' actionformats ' %F{#ff8c00}🌱 %b|%a%f'
+
+# PROMPT: SSH block, 'in', ORANGE Path, ARROW (Green=Success, Soft Red=Fail)
+if [[ -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
+    PROMPT='${ssh_block}%F{#f8f8f2}in%f %F{#ff8c00}%~%f %(?.%F{#00ff7f}❯.%F{#e06c75}❯)%f '
+else
+    PROMPT='${ssh_block}%F{#ff8c00}%~%f %(?.%F{#00ff7f}❯.%F{#e06c75}❯)%f '
+fi
+
+RPROMPT='${vcs_info_msg_0_}'
+
+#######################
+
+#PROMPT='%F{141}%~ %F{117}❯%f '
 
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
