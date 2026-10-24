@@ -27,15 +27,15 @@ precmd() {
     fi
 }
 
-# RPROMPT: Orange Seedling & Branch
-zstyle ':vcs_info:git:*' formats ' %F{#ff8c00}🌱 %b%f'
-zstyle ':vcs_info:git:*' actionformats ' %F{#ff8c00}🌱 %b|%a%f'
+# RPROMPT: Golden Orange Seedling & Branch
+zstyle ':vcs_info:git:*' formats ' %F{#f39c12}🌱 %b%f'
+zstyle ':vcs_info:git:*' actionformats ' %F{#f39c12}🌱 %b|%a%f'
 
-# PROMPT: SSH block, 'in', ORANGE Path, ARROW (Green=Success, Soft Red=Fail)
+# PROMPT: SSH block, 'in', GOLDEN ORANGE Path, ARROW (Green=Success, Soft Red=Fail)
 if [[ -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
-    PROMPT='${ssh_block}%F{#f8f8f2}in%f %F{#ff8c00}%~%f %(?.%F{#00ff7f}❯.%F{#e06c75}❯)%f '
+    PROMPT='${ssh_block}%F{#f8f8f2}in%f %F{#f39c12}%~%f %(?.%F{#a3e635}➜.%F{#e06c75}➜)%f '
 else
-    PROMPT='${ssh_block}%F{#ff8c00}%~%f %(?.%F{#00ff7f}❯.%F{#e06c75}❯)%f '
+    PROMPT='${ssh_block}%F{#f39c12}%~%f %(?.%F{#a3e635}➜.%F{#e06c75}➜)%f '
 fi
 
 RPROMPT='${vcs_info_msg_0_}'
