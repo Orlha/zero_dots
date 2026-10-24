@@ -19,10 +19,10 @@ autoload -Uz vcs_info
 precmd() {
     vcs_info
     if [[ -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
-        # Over SSH: User, "in", Globe, Host
-        ssh_block='%F{#a3e635}%n%f %F{#b2b2b2}in%f %F{#a3e635}🌍 %m%f '
+        # Over SSH: User › Globe Host
+        ssh_block='%F{#a3e635}%n%f %F{#b2b2b2}›%f %F{#a3e635}🌍 %m%f '
     else
-        # Local: Just User
+        # Local: Just User (No arrow needed here)
         ssh_block='%F{#a3e635}%n%f '
     fi
 }
@@ -31,9 +31,9 @@ precmd() {
 zstyle ':vcs_info:git:*' formats ' %F{#f39c12}🌱 %b%f'
 zstyle ':vcs_info:git:*' actionformats ' %F{#f39c12}🌱 %b|%a%f'
 
-# PROMPT: SSH block, 'in', GOLDEN ORANGE Path, ARROW (Green=Success, Soft Red=Fail)
+# PROMPT: SSH block, › , GOLDEN ORANGE Path, ARROW (Green=Success, Soft Red=Fail)
 if [[ -n "$SSH_CLIENT" || -n "$SSH_CONNECTION" ]]; then
-    PROMPT='${ssh_block}%F{#b2b2b2}in%f %F{#f39c12}%~%f %(?.%F{#a3e635}➜.%F{#e06c75}➜)%f '
+    PROMPT='${ssh_block}%F{#b2b2b2}›%f %F{#f39c12}%~%f %(?.%F{#a3e635}➜.%F{#e06c75}➜)%f '
 else
     PROMPT='${ssh_block}%F{#f39c12}%~%f %(?.%F{#a3e635}➜.%F{#e06c75}➜)%f '
 fi
