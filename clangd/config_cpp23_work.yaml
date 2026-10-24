@@ -122,6 +122,8 @@ CompileFlags:
     -isystem/opt/ros/humble/include/vision_msgs,
     -isystem/opt/ros/humble/include/visualization_msgs,
     -isystem/usr/include/opencv4,
+    -isystem/usr/local/include/iceoryx2/v0.9.3,
+    -isystem/usr/local/include/iceoryx2/v0.10.0,
   ]
 Diagnostics:
   UnusedIncludes: Strict
