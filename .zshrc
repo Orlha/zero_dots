@@ -11,6 +11,9 @@ if [ "$TERM" = "linux" ]; then
     return 0
 fi
 
+export GPG_TTY=$(tty)
+export GOPASS_CLIPBOARD_COPY_CMD="$HOME/.local/bin/osc52-copy.sh"
+
 #######################
 
 setopt PROMPT_SUBST
