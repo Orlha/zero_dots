@@ -15,16 +15,9 @@ export ZSH_COMPDUMP="$HOME/.cache/zcompdump"
 #setopt PROMPT_SUBST
 PROMPT='%F{141}%~ %F{117}❯%f '
 
-#DISABLE_AUTO_TITLE="true"
-#unsetopt prompt_subst
-#print -n "\033]2;kitty\033\\"
-
 export XCURSOR_THEME=breeze_cursors
 export XCURSOR_SIZE=24
 export COLORTERM=truecolor
-
-# CASE_SENSITIVE="true"
-# DISABLE_AUTO_TITLE="true"
 
 autoload -Uz compinit
 compinit -d "$ZSH_COMPDUMP"
@@ -51,17 +44,12 @@ else
     source /usr/share/zsh/share/antigen.zsh
 fi
 
-zvm_after_init_commands+=(
-    #'zvm_bindkey viins "^R" fzf-history-widget'
-)
-
 antigen use oh-my-zsh
 antigen bundle sudo
 antigen bundle colored-man-pages
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-#antigen bundle jeffreytse/zsh-vi-mode
 antigen apply
 
 # unbind alt+l that zsh binds
@@ -111,27 +99,3 @@ source <(fzf --zsh)
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=244'
-return
-
-# Keypad
-# 0 . Enter
-bindkey -s "^[Op" "0"
-bindkey -s "^[On" "."
-bindkey -s "^[OM" "^M"
-# 1 2 3
-bindkey -s "^[Oq" "1"
-bindkey -s "^[Or" "2"
-bindkey -s "^[Os" "3"
-# 4 5 6
-bindkey -s "^[Ot" "4"
-bindkey -s "^[Ou" "5"
-bindkey -s "^[Ov" "6"
-# 7 8 9
-bindkey -s "^[Ow" "7"
-bindkey -s "^[Ox" "8"
-bindkey -s "^[Oy" "9"
-# + -  * /
-bindkey -s "^[Ok" "+"
-bindkey -s "^[Om" "-"
-bindkey -s "^[Oj" "*"
-bindkey -s "^[Oo" "/"
