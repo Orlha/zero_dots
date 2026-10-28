@@ -972,6 +972,8 @@ autocmd WinNew *
 
 
 lua << EOF
+vim.keymap.set("i", "-", "_", { noremap = true })
+vim.keymap.set("i", "_", "-", { noremap = true })
 --vim.opt.shortmess:append("A")
 vim.opt.matchpairs:append("<:>")
 EOF
