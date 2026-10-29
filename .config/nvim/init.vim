@@ -972,8 +972,26 @@ autocmd WinNew *
 
 
 lua << EOF
-vim.keymap.set("i", "-", "_", { noremap = true })
-vim.keymap.set("i", "_", "-", { noremap = true })
+-- 1. Standard mode swaps (Insert, Normal, Visual, Operator-pending)
+local standard_modes = {"i", "n", "v", "o"}
+vim.keymap.set(standard_modes, "-", "_")
+vim.keymap.set(standard_modes, "_", "-")
+
+-- 2. Single-character 'r' replacements (Normal and Visual modes)
+local replace_modes = {"n", "v"}
+vim.keymap.set(replace_modes, "r-", "r_")
+vim.keymap.set(replace_modes, "r_", "r-")
+
+-- 3. Character-finding motions (Normal, Visual, and Operator-pending modes)
+local motion_modes = {"n", "v", "o"}
+vim.keymap.set(motion_modes, "f-", "f_")
+vim.keymap.set(motion_modes, "f_", "f-")
+vim.keymap.set(motion_modes, "F-", "F_")
+vim.keymap.set(motion_modes, "F_", "F-")
+vim.keymap.set(motion_modes, "t-", "t_")
+vim.keymap.set(motion_modes, "t_", "t-")
+vim.keymap.set(motion_modes, "T-", "T_")
+vim.keymap.set(motion_modes, "T_", "T-")
 --vim.opt.shortmess:append("A")
 vim.opt.matchpairs:append("<:>")
 EOF
