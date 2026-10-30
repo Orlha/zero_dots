@@ -216,6 +216,12 @@ require("no-neck-pain").setup({
 
 --require('lualine').setup()
 require('lualine').setup({
+--[[
+options = {
+    section_separators = { left = '\u{e0b4}', right = '\u{e0b6}' },
+    component_separators = { left = '\u{e0b5}', right = '\u{e0b7}' },
+},
+]]
 sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
