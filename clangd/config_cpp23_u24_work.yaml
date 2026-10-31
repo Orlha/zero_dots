@@ -122,6 +122,7 @@ CompileFlags:
     -isystem/usr/include/opencv4,
     -isystem/usr/local/include/iceoryx2/v0.9.3,
     -isystem/usr/local/include/iceoryx2/v0.10.0,
+    -isystem/usr/include/eigen3,
   ]
 Diagnostics:
   UnusedIncludes: Strict
