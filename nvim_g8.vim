@@ -85,7 +85,7 @@ vim.keymap.set('n', '?', '<cmd>FineCmdline ?<CR>', { noremap = true })
 EOF
 
 lua << EOF
-local languages = { "c", "cpp" }
+local languages = { "c", "cpp", "json" }
 require('nvim-treesitter').install(languages)
 
 vim.filetype.add({
@@ -95,7 +95,7 @@ vim.filetype.add({
   },
 })
 
-local ts_enabled_filetypes = { "c", "cpp" }
+local ts_enabled_filetypes = { "c", "cpp", "json" }
 
 vim.api.nvim_create_autocmd('FileType', {
   callback = function()
@@ -1065,4 +1065,10 @@ vim.keymap.set(motion_modes, "T-", "T_")
 vim.keymap.set(motion_modes, "T_", "T-")
 --vim.opt.shortmess:append("A")
 vim.opt.matchpairs:append("<:>")
+
+local hpp = require("nvim-web-devicons").get_icons()["hpp"]
+require("nvim-web-devicons").set_icon({
+    tpp = { icon = hpp.icon, color = hpp.color, name = "tpp" },
+})
+vim.filetype.add({ extension = { tpp = "cpp" } })
 EOF
