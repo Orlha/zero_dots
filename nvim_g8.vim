@@ -993,6 +993,9 @@ EOF
 
 lua << EOF
 require('fzf-lua').setup({
+    defaults = {
+        _devicons_setup = vim.fn.stdpath("config") .. "/plugin/devicons_tpp.lua",
+    },
     winopts = {
         height     = 0.65,
         width      = 0.75,
@@ -1066,9 +1069,34 @@ vim.keymap.set(motion_modes, "T_", "T-")
 --vim.opt.shortmess:append("A")
 vim.opt.matchpairs:append("<:>")
 
+--[[
 local hpp = require("nvim-web-devicons").get_icons()["hpp"]
 require("nvim-web-devicons").set_icon({
     tpp = { icon = hpp.icon, color = hpp.color, name = "tpp" },
 })
 vim.filetype.add({ extension = { tpp = "cpp" } })
+]]
 EOF
+
+
+lua << EOF
+vim.filetype.add({ extension = { tpp = "cpp" } })
+
+local devicons = require("nvim-web-devicons")
+local hpp = devicons.get_icons_by_extension()["hpp"]
+
+devicons.setup({
+  override_by_extension = {
+    tpp = {
+      icon = "\u{f0b1b}",
+      color = hpp and hpp.color or "#A074C4",
+      cterm_color = hpp and hpp.cterm_color or "140",
+      name = "Tpp",
+    },
+  },
+})
+
+--require("fzf-lua.devicons").unload()
+--require("fzf-lua.devicons").load()
+EOF
+
